@@ -39,14 +39,14 @@ public class MainController {
     public void doImportData(String filePath) {
         try {
             this.data = importData(filePath);
-            doDisplayData(data);
+            doDisplayData();
         } catch (ServiceException e) {
             log.severe(String.format("Exception occurred at importing data: %s", e.getMessage()));
             showError(e.getMessage());
         }
     }
 
-    public void doDisplayData(Data data) {
+    public void doDisplayData() {
         mainPanel.displayData(data);
     }
 
@@ -59,10 +59,15 @@ public class MainController {
     }
 
     public void doExportData() {
-        System.out.println(exportData());
+        try {
+            mainPanel.saveData();
+        } catch (ServiceException e) {
+            log.severe(String.format("Exception occurred while exporting data: %s", e.getMessage()));
+            showError(e.getMessage());
+        }
     }
 
-    private String exportData() {
+    public String exportData(String extension) {
         List<String> headers = data.getHeaders();
         List<List<String>> rowData = data.getData();
 

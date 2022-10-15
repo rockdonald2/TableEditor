@@ -1,14 +1,21 @@
 package edu.gof.visitor.panel;
 
 import edu.gof.visitor.controller.MainController;
+import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.service.loader.Data;
 import edu.gof.visitor.utils.Constants;
+import edu.gof.visitor.utils.Util;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class MainPanel extends JFrame {
@@ -39,6 +46,7 @@ public class MainPanel extends JFrame {
         final JMenuItem openItem = new JMenuItem("Open Document");
         openItem.addActionListener(e -> {
             final JFileChooser chooser = new JFileChooser();
+            chooser.setFileFilter(new FileNameExtensionFilter("Comma-separated values", "csv"));
             chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
             int hasOpened = chooser.showOpenDialog(MainPanel.this);
 
@@ -81,6 +89,33 @@ public class MainPanel extends JFrame {
                 });
 
         this.table.setModel(new DefaultTableModel(tableData, headers.toArray()));
+    }
+
+    public void saveData() throws ServiceException {
+        final JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        chooser.setFileFilter(new FileNameExtensionFilter("JSON", "json"));
+        int hasOpened = chooser.showSaveDialog(this);
+
+        if (hasOpened != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        final File saveFile = chooser.getSelectedFile();
+        final Optional<String> extension = Util.getExtensionByStringHandling(saveFile.getName());
+
+        if (extension.isEmpty()) {
+            showError(String.format("Failed to find extension of file %s", saveFile.getName()));
+            return;
+        }
+
+        final String data = mainController.exportData(extension.get());
+
+        try {
+            Files.writeString(saveFile.toPath(), data);
+        } catch (IOException e) {
+            throw new ServiceException("Failed to save data", e);
+        }
     }
 
 }
