@@ -12,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Optional;
@@ -78,6 +77,10 @@ public class MainPanel extends JFrame {
         JOptionPane.showMessageDialog(this, message);
     }
 
+    public void showInfo(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+
     public void displayData(Data data) {
         List<String> headers = data.getHeaders();
         List<List<String>> rowData = data.getData();
@@ -88,34 +91,30 @@ public class MainPanel extends JFrame {
                     tableData[idx] = rowData.get(idx).toArray(new String[]{});
                 });
 
-        this.table.setModel(new DefaultTableModel(tableData, headers.toArray()));
+        this.table.setModel(new DefaultTableModel(tableData, headers.toArray()) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return true;
+            }
+
+            @Override
+            public void setValueAt(Object aValue, int row, int column) {
+                super.setValueAt(aValue, row, column);
+            }
+        });
     }
 
-    public void saveData() throws ServiceException {
+    public Optional<File> saveData() throws ServiceException {
         final JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
         chooser.setFileFilter(new FileNameExtensionFilter("JSON", "json"));
         int hasOpened = chooser.showSaveDialog(this);
 
         if (hasOpened != JFileChooser.APPROVE_OPTION) {
-            return;
+            return Optional.empty();
         }
 
-        final File saveFile = chooser.getSelectedFile();
-        final Optional<String> extension = Util.getExtensionByStringHandling(saveFile.getName());
-
-        if (extension.isEmpty()) {
-            showError(String.format("Failed to find extension of file %s", saveFile.getName()));
-            return;
-        }
-
-        final String data = mainController.exportData(extension.get());
-
-        try {
-            Files.writeString(saveFile.toPath(), data);
-        } catch (IOException e) {
-            throw new ServiceException("Failed to save data", e);
-        }
+        return Optional.ofNullable(chooser.getSelectedFile());
     }
 
 }

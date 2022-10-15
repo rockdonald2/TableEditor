@@ -11,7 +11,11 @@ import edu.gof.visitor.service.loader.Importer;
 import edu.gof.visitor.service.loader.csv.CsvData;
 import edu.gof.visitor.service.loader.csv.CsvImporter;
 import edu.gof.visitor.utils.Converters;
+import edu.gof.visitor.utils.Util;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -40,6 +44,7 @@ public class MainController {
         try {
             this.data = importData(filePath);
             doDisplayData();
+            mainPanel.showInfo("Successfully imported data");
         } catch (ServiceException e) {
             log.severe(String.format("Exception occurred at importing data: %s", e.getMessage()));
             showError(e.getMessage());
@@ -60,7 +65,27 @@ public class MainController {
 
     public void doExportData() {
         try {
-            mainPanel.saveData();
+            Optional<File> optionalSaveFile = mainPanel.saveData();
+
+            if (optionalSaveFile.isEmpty()) return;
+
+            final File saveFile = optionalSaveFile.get();
+
+            final Optional<String> extension = Util.getExtensionByStringHandling(saveFile.getName());
+
+            if (extension.isEmpty()) {
+                showError(String.format("Failed to find extension of file %s", saveFile.getName()));
+                return;
+            }
+
+            final String data = exportData(extension.get());
+
+            try {
+                Files.writeString(saveFile.toPath(), data);
+                mainPanel.showInfo("Successfully exported data");
+            } catch (IOException e) {
+                throw new ServiceException("Failed to save data", e);
+            }
         } catch (ServiceException e) {
             log.severe(String.format("Exception occurred while exporting data: %s", e.getMessage()));
             showError(e.getMessage());
