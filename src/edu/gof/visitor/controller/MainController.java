@@ -125,4 +125,19 @@ public class MainController {
         doDisplayData();
     }
 
+    public void doDeleteRowAt(int rowIdx) {
+        data.getData().remove(rowIdx);
+        doDisplayData();
+    }
+
+    public void doDeleteColumnAt(int columnIdx) {
+        List<String> headers = data.getHeaders();
+        List<List<String>> rowData = data.getData();
+
+        rowData.forEach(row -> row.remove(columnIdx));
+        headers.remove(columnIdx);
+
+        doDisplayData();
+    }
+
 }

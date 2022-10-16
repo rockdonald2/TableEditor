@@ -10,8 +10,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
@@ -62,14 +63,56 @@ public class MainPanel extends JFrame {
 
         menuPanel.add(addRowBtn);
         menuPanel.add(addColumnBtn);
+        this.setPreferredSize(new Dimension(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT / 6));
+        menuPanel.setLayout(new GridLayout(1, 2));
         this.add(menuPanel);
     }
 
     private void createTable() {
         this.table = new JTable();
         this.table.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
+        this.table.setRowHeight(24);
         this.table.setModel(new DefaultTableModel(new String[][]{}, new String[]{"...", "..."}));
-        this.add(new JScrollPane(table));
+
+        final JPopupMenu popupMenu = new JPopupMenu();
+
+        final JMenuItem deleteRowPopupItem = new JMenuItem("Delete Selected Row");
+        deleteRowPopupItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Point point = SwingUtilities.convertPoint(deleteRowPopupItem, new Point(0, 0), table);
+
+                int rowAtPoint = table.rowAtPoint(point);
+
+                if (rowAtPoint > -1) {
+                    table.setRowSelectionInterval(rowAtPoint, rowAtPoint);
+                    mainController.doDeleteRowAt(rowAtPoint);
+                }
+            }
+        });
+        popupMenu.add(deleteRowPopupItem);
+
+        final JMenuItem deleteColPopupItem = new JMenuItem("Delete Selected Column");
+        deleteColPopupItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Point point = SwingUtilities.convertPoint(deleteColPopupItem, new Point(0, 0), table);
+
+                int colAtPoint = table.columnAtPoint(point);
+
+                if (colAtPoint > -1) {
+                    table.setColumnSelectionInterval(colAtPoint, colAtPoint);
+                    mainController.doDeleteColumnAt(colAtPoint);
+                }
+            }
+        });
+        popupMenu.add(deleteColPopupItem);
+
+        this.table.setComponentPopupMenu(popupMenu);
+
+        final JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT));
+        this.add(scrollPane);
     }
 
     private void createMenuBar() {
