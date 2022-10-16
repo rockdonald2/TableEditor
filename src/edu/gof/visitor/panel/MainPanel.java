@@ -4,15 +4,14 @@ import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.service.loader.Data;
 import edu.gof.visitor.utils.Constants;
-import edu.gof.visitor.utils.Util;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -21,17 +20,52 @@ public class MainPanel extends JFrame {
 
     private final MainController mainController;
     private JTable table;
+    private JButton addRowBtn;
+    private JButton addColumnBtn;
 
     public MainPanel(MainController mainController) {
         this.mainController = mainController;
 
+        createMenuButtons();
         createMenuBar();
         createTable();
         baseConfig();
     }
 
+    private void addNewRow(ActionEvent e) {
+        mainController.doAddNewRow();
+    }
+
+    private void addNewColumn(ActionEvent actionEvent) {
+        String columnName = JOptionPane.showInputDialog(this, "Specify the name of the new column");
+
+        if (columnName == null || columnName.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Empty column name specified");
+            return;
+        }
+
+        mainController.doAddNewColumn(columnName);
+    }
+
+    private void createMenuButtons() {
+        final JPanel menuPanel = new JPanel();
+
+        addRowBtn = new JButton("Add Row");
+        addRowBtn.setEnabled(false);
+        addRowBtn.addActionListener(this::addNewRow);
+
+        addColumnBtn = new JButton("Add Column");
+        addColumnBtn.setEnabled(false);
+        addColumnBtn.addActionListener(this::addNewColumn);
+
+        menuPanel.add(addRowBtn);
+        menuPanel.add(addColumnBtn);
+        this.add(menuPanel);
+    }
+
     private void createTable() {
         this.table = new JTable();
+        this.table.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
         this.table.setModel(new DefaultTableModel(new String[][]{}, new String[]{"...", "..."}));
         this.add(new JScrollPane(table));
     }
@@ -67,6 +101,7 @@ public class MainPanel extends JFrame {
     }
 
     private void baseConfig() {
+        this.setLayout(new FlowLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setLocationRelativeTo(null); // centralizer
@@ -100,8 +135,12 @@ public class MainPanel extends JFrame {
             @Override
             public void setValueAt(Object aValue, int row, int column) {
                 super.setValueAt(aValue, row, column);
+                mainController.doModifyValueAt(row, column, aValue.toString());
             }
         });
+
+        addRowBtn.setEnabled(true);
+        addColumnBtn.setEnabled(true);
     }
 
     public Optional<File> saveData() throws ServiceException {

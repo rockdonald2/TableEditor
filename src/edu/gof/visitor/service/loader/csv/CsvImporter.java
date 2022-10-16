@@ -33,7 +33,7 @@ public class CsvImporter implements Importer {
             int idx = 0;
 
             while ((tempLine = reader.readLine()) != null) {
-                List<String> values = Arrays.asList(tempLine.split(","));
+                List<String> values = new ArrayList<>(List.of(tempLine.split(",")));
 
                 if (idx == 0) {
                     headers = values;

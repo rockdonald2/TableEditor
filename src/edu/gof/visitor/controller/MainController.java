@@ -16,10 +16,12 @@ import edu.gof.visitor.utils.Util;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 public class MainController {
 
@@ -92,21 +94,29 @@ public class MainController {
         }
     }
 
-    public String exportData(String extension) {
+    private String exportData(String extension) {
         List<String> headers = data.getHeaders();
         List<List<String>> rowData = data.getData();
 
         StringBuilder exportedData = new StringBuilder();
 
-        AtomicInteger idx = new AtomicInteger();
+        AtomicInteger fieldIdx = new AtomicInteger(0);
+        AtomicInteger elemIdx = new AtomicInteger(0);
+
+        exportedData.append("[");
         rowData.forEach(row -> {
             exportedData.append("{");
-            idx.set(0);
+            fieldIdx.set(0);
 
             row.forEach(value -> {
-                String key = headers.get(idx.get());
+                String key = headers.get(fieldIdx.get());
+                Optional<Field> field = Optional.empty();
 
-                Optional<Field> field = Converters.tryParseNumberField(key, value);
+                field = Converters.tryParseNumberField(key, value);
+
+                if (field.isEmpty()) {
+                    field = Converters.tryParseDecimalField(key, value);
+                }
 
                 if (field.isEmpty()) {
                     field = Optional.of(new TextField(key, value));
@@ -114,17 +124,48 @@ public class MainController {
 
                 exportedData.append(field.get().accept(exporter));
 
-                if (idx.get() < (headers.size() - 1)) {
+                if (fieldIdx.get() < (headers.size() - 1)) {
                     exportedData.append(",");
                 }
 
-                idx.getAndIncrement();
+                fieldIdx.getAndIncrement();
             });
 
             exportedData.append("}");
+
+            if (elemIdx.get() < (rowData.size() - 1)) {
+                exportedData.append(",");
+            }
+
+            elemIdx.incrementAndGet();
         });
 
+        exportedData.append("]");
+
         return exportedData.toString();
+    }
+
+    public void doModifyValueAt(int row, int column, String value) {
+        List<List<String>> rowData = data.getData();
+        rowData.get(row).set(column, value);
+    }
+
+    public void doAddNewRow() {
+        final List<String> newRow = new ArrayList<>(data.getHeaders().size());
+        IntStream.range(0, data.getHeaders().size()).forEach(idx -> newRow.add(""));
+
+        data.getData().add(newRow);
+        doDisplayData();
+    }
+
+    public void doAddNewColumn(String columnName) {
+        List<List<String>> rowData = data.getData();
+        List<String> headers = data.getHeaders();
+
+        rowData.forEach(row -> row.add(""));
+        headers.add(columnName);
+
+        doDisplayData();
     }
 
 }

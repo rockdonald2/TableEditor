@@ -4,11 +4,11 @@ import edu.gof.visitor.service.export.ExportVisitor;
 
 public abstract class Field {
 
+    protected String key;
+
     public Field(String key) {
         this.key = key;
     }
-
-    protected String key;
 
     public String getKey() {
         return key;
