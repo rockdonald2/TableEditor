@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
@@ -22,6 +23,7 @@ public class MainPanel extends JFrame {
     private JTable table;
     private JButton addRowBtn;
     private JButton addColumnBtn;
+    private JMenuItem exportItem;
 
     public MainPanel(MainController mainController) {
         this.mainController = mainController;
@@ -90,10 +92,12 @@ public class MainPanel extends JFrame {
             File selectedFile = chooser.getSelectedFile();
             mainController.doImportData(selectedFile.getAbsolutePath());
         });
-        final JMenuItem exportItem = new JMenuItem("Export Table");
+
+        exportItem = new JMenuItem("Export Table");
         exportItem.addActionListener(e -> {
             mainController.doExportData();
         });
+        exportItem.setEnabled(false);
 
         mainMenu.add(openItem);
         mainMenu.add(exportItem);
@@ -101,6 +105,8 @@ public class MainPanel extends JFrame {
     }
 
     private void baseConfig() {
+        this.getRootPane().registerKeyboardAction(e -> exportItem.doClick(), KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+
         this.setLayout(new FlowLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -141,6 +147,7 @@ public class MainPanel extends JFrame {
 
         addRowBtn.setEnabled(true);
         addColumnBtn.setEnabled(true);
+        exportItem.setEnabled(true);
     }
 
     public Optional<File> saveData() throws ServiceException {

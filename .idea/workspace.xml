@@ -9,11 +9,6 @@
       <change beforePath="$PROJECT_DIR$/data/out.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/out.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/panel/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/Field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/ExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/ExportVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/loader/csv/CsvImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/loader/csv/CsvImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Converters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Converters.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1665838626684</updated>
       <workItem from="1665838627855" duration="11258000" />
-      <workItem from="1665925741786" duration="3317000" />
+      <workItem from="1665925741786" duration="4152000" />
     </task>
     <servers />
   </component>
