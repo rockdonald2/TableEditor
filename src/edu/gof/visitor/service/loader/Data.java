@@ -6,9 +6,9 @@ public interface Data {
 
     List<String> getHeaders();
 
-    List<List<String>> getData();
-
     void setHeaders(List<String> headers);
+
+    List<List<String>> getData();
 
     void setData(List<List<String>> data);
 
