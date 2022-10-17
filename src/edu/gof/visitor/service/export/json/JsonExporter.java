@@ -17,7 +17,7 @@ public class JsonExporter implements Exporter {
     public String exportData(Data data) {
         List<String> headers = data.getHeaders();
         List<List<String>> rowData = data.getData();
-        StringBuilder exportedData  = new StringBuilder();
+        StringBuilder exportedData = new StringBuilder();
 
         final ExportVisitor exporterVisitor = new JsonExportVisitor();
 

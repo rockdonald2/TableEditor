@@ -24,7 +24,6 @@ public class MainController {
     private static final Logger log = Logger.getLogger(MainController.class.getName());
 
     private final MainPanel mainPanel;
-    private final Importer importer;
 
     private Data data;
 
@@ -33,7 +32,6 @@ public class MainController {
 
         this.data = new CsvData();
         this.mainPanel = new MainPanel(this);
-        this.importer = new CsvImporter();
     }
 
     public void doImportData(String filePath) {
@@ -56,6 +54,21 @@ public class MainController {
     }
 
     private Data importData(String filePath) throws ServiceException {
+        final Optional<String> extension = Util.getExtensionByStringHandling(filePath);
+
+        if (extension.isEmpty()) {
+            throw new ServiceException("Failed to deduce extension from file name while importing data");
+        }
+
+        Importer importer = null;
+        if ("csv".equals(extension.get())) {
+            importer = new CsvImporter();
+        }
+
+        if (importer == null) {
+            throw new ServiceException("Failed to obtain importer");
+        }
+
         return importer.importData(filePath);
     }
 

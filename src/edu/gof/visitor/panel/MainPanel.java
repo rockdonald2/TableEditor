@@ -22,14 +22,13 @@ public class MainPanel extends JFrame {
 
     private final MainController mainController;
     private JTable table;
-    private JButton addRowBtn;
-    private JButton addColumnBtn;
+    private JMenuItem addRowBtn;
+    private JMenuItem addColumnBtn;
     private JMenuItem exportItem;
 
     public MainPanel(MainController mainController) {
         this.mainController = mainController;
 
-        createMenuButtons();
         createMenuBar();
         createTable();
         baseConfig();
@@ -50,24 +49,6 @@ public class MainPanel extends JFrame {
         mainController.doAddNewColumn(columnName);
     }
 
-    private void createMenuButtons() {
-        final JPanel menuPanel = new JPanel();
-
-        addRowBtn = new JButton("Add Row");
-        addRowBtn.setEnabled(false);
-        addRowBtn.addActionListener(this::addNewRow);
-
-        addColumnBtn = new JButton("Add Column");
-        addColumnBtn.setEnabled(false);
-        addColumnBtn.addActionListener(this::addNewColumn);
-
-        menuPanel.add(addRowBtn);
-        menuPanel.add(addColumnBtn);
-        this.setPreferredSize(new Dimension(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT / 6));
-        menuPanel.setLayout(new GridLayout(1, 2));
-        this.add(menuPanel);
-    }
-
     private void createTable() {
         this.table = new JTable();
         this.table.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
@@ -81,11 +62,9 @@ public class MainPanel extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 Point point = SwingUtilities.convertPoint(deleteRowPopupItem, new Point(0, 0), table);
-
                 int rowAtPoint = table.rowAtPoint(point);
 
                 if (rowAtPoint > -1) {
-                    table.setRowSelectionInterval(rowAtPoint, rowAtPoint);
                     mainController.doDeleteRowAt(rowAtPoint);
                 }
             }
@@ -97,11 +76,9 @@ public class MainPanel extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 Point point = SwingUtilities.convertPoint(deleteColPopupItem, new Point(0, 0), table);
-
                 int colAtPoint = table.columnAtPoint(point);
 
                 if (colAtPoint > -1) {
-                    table.setColumnSelectionInterval(colAtPoint, colAtPoint);
                     mainController.doDeleteColumnAt(colAtPoint);
                 }
             }
@@ -117,9 +94,14 @@ public class MainPanel extends JFrame {
 
     private void createMenuBar() {
         final JMenuBar menuBar = new JMenuBar();
+
         final JMenu mainMenu = new JMenu("Main Menu");
         mainMenu.setMnemonic(KeyEvent.VK_M);
         menuBar.add(mainMenu);
+
+        final JMenu fileMenu = new JMenu("File");
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+        menuBar.add(fileMenu);
 
         final JMenuItem openItem = new JMenuItem("Open Document");
         openItem.addActionListener(e -> {
@@ -132,7 +114,7 @@ public class MainPanel extends JFrame {
                 return;
             }
 
-            File selectedFile = chooser.getSelectedFile();
+            final File selectedFile = chooser.getSelectedFile();
             mainController.doImportData(selectedFile.getAbsolutePath());
         });
 
@@ -142,8 +124,20 @@ public class MainPanel extends JFrame {
         });
         exportItem.setEnabled(false);
 
+        addRowBtn = new JMenuItem("Add Row");
+        addRowBtn.setEnabled(false);
+        addRowBtn.addActionListener(this::addNewRow);
+
+        addColumnBtn = new JMenuItem("Add Column");
+        addColumnBtn.setEnabled(false);
+        addColumnBtn.addActionListener(this::addNewColumn);
+
         mainMenu.add(openItem);
         mainMenu.add(exportItem);
+
+        fileMenu.add(addRowBtn);
+        fileMenu.add(addColumnBtn);
+
         this.setJMenuBar(menuBar);
     }
 
@@ -158,11 +152,11 @@ public class MainPanel extends JFrame {
     }
 
     public void showError(String message) {
-        JOptionPane.showMessageDialog(this, message);
+        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     public void showInfo(String message) {
-        JOptionPane.showMessageDialog(this, message);
+        JOptionPane.showMessageDialog(this, message, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void displayData(Data data) {

@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CsvImporter implements Importer {
@@ -18,7 +17,6 @@ public class CsvImporter implements Importer {
     @Override
     public Data importData(String fileName) throws ServiceException {
         final Data data = new CsvData();
-
         final Path file = Path.of(fileName);
 
         if (Files.notExists(file)) {
