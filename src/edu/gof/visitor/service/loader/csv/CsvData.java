@@ -8,11 +8,11 @@ import java.util.List;
 public class CsvData implements Data {
 
     private List<String> headers;
-    private List<List<String>> rowData;
+    private List<List<String>> data;
 
     public CsvData() {
         this.headers = Collections.emptyList();
-        this.rowData = Collections.emptyList();
+        this.data = Collections.emptyList();
     }
 
     @Override
@@ -22,7 +22,7 @@ public class CsvData implements Data {
 
     @Override
     public List<List<String>> getData() {
-        return rowData;
+        return data;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CsvData implements Data {
 
     @Override
     public void setData(List<List<String>> data) {
-        this.rowData = data;
+        this.data = data;
     }
 
 }
