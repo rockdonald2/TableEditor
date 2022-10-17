@@ -1,8 +1,8 @@
 package edu.gof.visitor.utils;
 
-import edu.gof.visitor.panel.tabel.DecimalField;
-import edu.gof.visitor.panel.tabel.Field;
-import edu.gof.visitor.panel.tabel.NumberField;
+import edu.gof.visitor.model.DecimalField;
+import edu.gof.visitor.model.Field;
+import edu.gof.visitor.model.NumberField;
 
 import java.util.Optional;
 

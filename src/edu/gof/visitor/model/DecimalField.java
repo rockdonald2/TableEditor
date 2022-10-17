@@ -1,4 +1,4 @@
-package edu.gof.visitor.panel.tabel;
+package edu.gof.visitor.model;
 
 import edu.gof.visitor.service.export.ExportVisitor;
 

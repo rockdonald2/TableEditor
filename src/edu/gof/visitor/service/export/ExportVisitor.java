@@ -1,8 +1,8 @@
 package edu.gof.visitor.service.export;
 
-import edu.gof.visitor.panel.tabel.DecimalField;
-import edu.gof.visitor.panel.tabel.NumberField;
-import edu.gof.visitor.panel.tabel.TextField;
+import edu.gof.visitor.model.DecimalField;
+import edu.gof.visitor.model.NumberField;
+import edu.gof.visitor.model.TextField;
 
 public interface ExportVisitor {
 

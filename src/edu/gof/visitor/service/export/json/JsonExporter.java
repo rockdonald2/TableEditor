@@ -1,7 +1,7 @@
 package edu.gof.visitor.service.export.json;
 
-import edu.gof.visitor.panel.tabel.Field;
-import edu.gof.visitor.panel.tabel.TextField;
+import edu.gof.visitor.model.Field;
+import edu.gof.visitor.model.TextField;
 import edu.gof.visitor.service.export.ExportVisitor;
 import edu.gof.visitor.service.export.Exporter;
 import edu.gof.visitor.service.loader.Data;

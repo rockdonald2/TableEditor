@@ -1,21 +1,21 @@
-package edu.gof.visitor.panel.tabel;
+package edu.gof.visitor.model;
 
 import edu.gof.visitor.service.export.ExportVisitor;
 
-public class NumberField extends Field {
+public class TextField extends Field {
 
-    private int value;
+    private String value;
 
-    public NumberField(String key, int value) {
+    public TextField(String key, String value) {
         super(key);
         this.value = value;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

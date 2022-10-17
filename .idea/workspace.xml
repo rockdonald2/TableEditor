@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66c56377-4c44-412d-b01f-7a4eb06b66c8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/loader/csv/CsvData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/loader/csv/CsvData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/DecimalField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/DecimalField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/NumberField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/NumberField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/TextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/TextField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/ExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/ExportVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Converters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Converters.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +95,7 @@
       <workItem from="1665925741786" duration="8594000" />
       <workItem from="1665984619326" duration="267000" />
       <workItem from="1666031006345" duration="1299000" />
-      <workItem from="1666032540584" duration="1103000" />
+      <workItem from="1666032540584" duration="1147000" />
     </task>
     <servers />
   </component>
