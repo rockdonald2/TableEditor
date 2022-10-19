@@ -12,7 +12,6 @@ public class ApplicationMain {
 
     public static void main(String[] args) {
         log.info(String.format("Application startup at %s", new Timestamp(System.currentTimeMillis())));
-
         FlatLightLaf.setup();
         new MainController();
     }

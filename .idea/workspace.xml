@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66c56377-4c44-412d-b01f-7a4eb06b66c8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/DecimalField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/DecimalField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/Field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/NumberField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/NumberField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/tabel/TextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/TextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/ExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/ExportVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Converters.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Converters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/RemoveRowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/RemoveRowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/panel/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,23 +35,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Workspace/egyetem/mesteri/tervezésiMintákÉsSablonok/projektek/GOF1/GOF1/lib/lombok.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Workspace/misc/cache-lite&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Workspace\egyetem\mesteri\tervezésiMintákÉsSablonok\projektek\GOF1\GOF1\lib" />
@@ -95,7 +92,11 @@
       <workItem from="1665925741786" duration="8594000" />
       <workItem from="1665984619326" duration="267000" />
       <workItem from="1666031006345" duration="1299000" />
-      <workItem from="1666032540584" duration="1147000" />
+      <workItem from="1666032540584" duration="1282000" />
+      <workItem from="1666117704548" duration="24000" />
+      <workItem from="1666118636906" duration="258000" />
+      <workItem from="1666120509526" duration="20000" />
+      <workItem from="1666203431317" duration="6067000" />
     </task>
     <servers />
   </component>

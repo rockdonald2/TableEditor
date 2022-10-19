@@ -1,6 +1,7 @@
 package edu.gof.visitor.controller;
 
-import edu.gof.visitor.panel.MainPanel;
+import edu.gof.visitor.command.Command;
+import edu.gof.visitor.model.Position;
 import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.service.export.Exporter;
 import edu.gof.visitor.service.export.json.JsonExporter;
@@ -9,6 +10,7 @@ import edu.gof.visitor.service.loader.Importer;
 import edu.gof.visitor.service.loader.csv.CsvData;
 import edu.gof.visitor.service.loader.csv.CsvImporter;
 import edu.gof.visitor.utils.Util;
+import edu.gof.visitor.view.MainPanel;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +18,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Stack;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
@@ -24,6 +27,9 @@ public class MainController {
     private static final Logger log = Logger.getLogger(MainController.class.getName());
 
     private final MainPanel mainPanel;
+
+    private final Stack<Command<?, ?>> commands = new Stack<>();
+    private final Stack<Command<?, ?>> undoCommands = new Stack<>();
 
     private Data data;
 
@@ -41,16 +47,8 @@ public class MainController {
             mainPanel.showInfo("Successfully imported data");
         } catch (ServiceException e) {
             log.severe(String.format("Exception occurred at importing data: %s", e.getMessage()));
-            showError(e.getMessage());
+            mainPanel.showError(e.getMessage());
         }
-    }
-
-    public void doDisplayData() {
-        mainPanel.displayData(data);
-    }
-
-    private void showError(String message) {
-        mainPanel.showError(message);
     }
 
     private Data importData(String filePath) throws ServiceException {
@@ -72,6 +70,10 @@ public class MainController {
         return importer.importData(filePath);
     }
 
+    public void doDisplayData() {
+        mainPanel.displayData(data);
+    }
+
     public void doExportData() {
         try {
             Optional<File> optionalSaveFile = mainPanel.saveData();
@@ -83,7 +85,7 @@ public class MainController {
             final Optional<String> extension = Util.getExtensionByStringHandling(saveFile.getName());
 
             if (extension.isEmpty()) {
-                showError(String.format("Failed to find extension of file %s", saveFile.getName()));
+                mainPanel.showError(String.format("Failed to find extension of file %s", saveFile.getName()));
                 return;
             }
 
@@ -97,7 +99,7 @@ public class MainController {
             }
         } catch (ServiceException e) {
             log.severe(String.format("Exception occurred while exporting data: %s", e.getMessage()));
-            showError(e.getMessage());
+            mainPanel.showError(e.getMessage());
         }
     }
 
@@ -151,6 +153,35 @@ public class MainController {
         headers.remove(columnIdx);
 
         doDisplayData();
+    }
+
+    public String getValueAt(Position position) {
+        return data.getData().get(position.getRow()).get(position.getColumn());
+    }
+
+    public void executeCommand(Command<?, ?> command) {
+        commands.push(command);
+        command.execute();
+
+        while (!undoCommands.empty()) undoCommands.pop();
+    }
+
+    public void undoCommand() {
+        try {
+            Command<?, ?> undo = commands.pop();
+            undoCommands.push(undo);
+            undo.unexecute();
+        } catch (RuntimeException ignored) {
+        }
+    }
+
+    public void redoCommand() {
+        try {
+            Command<?, ?> redo = undoCommands.pop();
+            commands.push(redo);
+            redo.execute();
+        } catch (RuntimeException ignored) {
+        }
     }
 
 }

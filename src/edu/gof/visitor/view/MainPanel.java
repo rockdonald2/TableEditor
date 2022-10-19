@@ -1,6 +1,8 @@
-package edu.gof.visitor.panel;
+package edu.gof.visitor.view;
 
+import edu.gof.visitor.command.EditCommand;
 import edu.gof.visitor.controller.MainController;
+import edu.gof.visitor.model.Position;
 import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.service.loader.Data;
 import edu.gof.visitor.utils.Constants;
@@ -14,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.EventObject;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -28,7 +31,10 @@ public class MainPanel extends JFrame {
 
     public MainPanel(MainController mainController) {
         this.mainController = mainController;
+        setup();
+    }
 
+    protected void setup() {
         createMenuBar();
         createTable();
         baseConfig();
@@ -49,7 +55,7 @@ public class MainPanel extends JFrame {
         mainController.doAddNewColumn(columnName);
     }
 
-    private void createTable() {
+    protected void createTable() {
         this.table = new JTable();
         this.table.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
         this.table.setRowHeight(24);
@@ -92,7 +98,7 @@ public class MainPanel extends JFrame {
         this.add(scrollPane);
     }
 
-    private void createMenuBar() {
+    protected void createMenuBar() {
         final JMenuBar menuBar = new JMenuBar();
 
         final JMenu mainMenu = new JMenu("Main Menu");
@@ -104,24 +110,10 @@ public class MainPanel extends JFrame {
         menuBar.add(fileMenu);
 
         final JMenuItem openItem = new JMenuItem("Open Document");
-        openItem.addActionListener(e -> {
-            final JFileChooser chooser = new JFileChooser();
-            chooser.setFileFilter(new FileNameExtensionFilter("Comma-separated values", "csv"));
-            chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-            int hasOpened = chooser.showOpenDialog(MainPanel.this);
-
-            if (hasOpened != JFileChooser.APPROVE_OPTION) {
-                return;
-            }
-
-            final File selectedFile = chooser.getSelectedFile();
-            mainController.doImportData(selectedFile.getAbsolutePath());
-        });
+        openItem.addActionListener(this::importData);
 
         exportItem = new JMenuItem("Export Table");
-        exportItem.addActionListener(e -> {
-            mainController.doExportData();
-        });
+        exportItem.addActionListener(e -> mainController.doExportData());
         exportItem.setEnabled(false);
 
         addRowBtn = new JMenuItem("Add Row");
@@ -141,14 +133,20 @@ public class MainPanel extends JFrame {
         this.setJMenuBar(menuBar);
     }
 
-    private void baseConfig() {
-        this.getRootPane().registerKeyboardAction(e -> exportItem.doClick(), KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+    protected void baseConfig() {
+        registerKeyShortcuts();
 
         this.setLayout(new FlowLayout());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-        this.setLocationRelativeTo(null); // centralizer
+        this.setLocationRelativeTo(null);
         this.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
+    }
+
+    protected void registerKeyShortcuts() {
+        this.getRootPane().registerKeyboardAction(e -> exportItem.doClick(), KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        this.getRootPane().registerKeyboardAction(e -> mainController.undoCommand(), KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        this.getRootPane().registerKeyboardAction(e -> mainController.redoCommand(), KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     public void showError(String message) {
@@ -169,22 +167,52 @@ public class MainPanel extends JFrame {
                     tableData[idx] = rowData.get(idx).toArray(new String[]{});
                 });
 
-        this.table.setModel(new DefaultTableModel(tableData, headers.toArray()) {
+        DefaultCellEditor editor = new DefaultCellEditor(new JTextField()) {
             @Override
-            public boolean isCellEditable(int row, int column) {
-                return true;
+            public boolean isCellEditable(EventObject e) {
+                if (e instanceof KeyEvent) {
+                    return startWithKeyEvent((KeyEvent) e);
+                }
+
+                return super.isCellEditable(e);
             }
 
+            private boolean startWithKeyEvent(KeyEvent e) {
+                if ((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0) {
+                    return false;
+                } else if ((e.getModifiersEx() & KeyEvent.ALT_DOWN_MASK) != 0) {
+                    return false;
+                }
+
+                return true;
+            }
+        };
+
+        this.table.setModel(new DefaultTableModel(tableData, headers.toArray()) {
             @Override
             public void setValueAt(Object aValue, int row, int column) {
-                super.setValueAt(aValue, row, column);
-                mainController.doModifyValueAt(row, column, aValue.toString());
+                mainController.executeCommand(new EditCommand(mainController, table, aValue.toString(), new Position(row, column)));
             }
         });
+        this.table.setDefaultEditor(Object.class, editor);
 
         addRowBtn.setEnabled(true);
         addColumnBtn.setEnabled(true);
         exportItem.setEnabled(true);
+    }
+
+    private void importData(ActionEvent e) {
+        final JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(new FileNameExtensionFilter("Comma-separated values", "csv"));
+        chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        int hasOpened = chooser.showOpenDialog(MainPanel.this);
+
+        if (hasOpened != JFileChooser.APPROVE_OPTION) {
+            return;
+        }
+
+        final File selectedFile = chooser.getSelectedFile();
+        mainController.doImportData(selectedFile.getAbsolutePath());
     }
 
     public Optional<File> saveData() throws ServiceException {
