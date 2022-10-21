@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
@@ -38,6 +39,14 @@ public class MainController {
 
         this.data = new CsvData();
         this.mainPanel = new MainPanel(this);
+    }
+
+    public int getColumns() {
+        return data.getHeaders().size();
+    }
+
+    public int getRows() {
+        return data.getData().size();
     }
 
     public void doImportData(String filePath) {
@@ -140,23 +149,45 @@ public class MainController {
         doDisplayData();
     }
 
-    public void doDeleteRowAt(int rowIdx) {
-        data.getData().remove(rowIdx);
+    public List<String> doDeleteRowAt(int rowIdx) {
+        List<String> lostData = data.getData().remove(rowIdx);
         doDisplayData();
+
+        return lostData;
     }
 
-    public void doDeleteColumnAt(int columnIdx) {
+    public List<String> doDeleteColumnAt(int columnIdx) {
         List<String> headers = data.getHeaders();
         List<List<String>> rowData = data.getData();
 
-        rowData.forEach(row -> row.remove(columnIdx));
+        List<String> lostData = new ArrayList<>();
+        rowData.forEach(row -> lostData.add(row.remove(columnIdx)));
         headers.remove(columnIdx);
 
+        doDisplayData();
+
+        return lostData;
+    }
+
+    public void doAddRowAt(int rowIdx, List<String> rowData) {
+        this.data.getData().add(rowIdx, rowData);
+        doDisplayData();
+    }
+
+    public void doAddColumnAt(int colIdx, List<String> colData, String colName) {
+        this.data.getHeaders().add(colIdx, colName);
+
+        AtomicInteger idx = new AtomicInteger();
+        this.data.getData().forEach(row -> row.add(colIdx, colData.get(idx.getAndIncrement())));
         doDisplayData();
     }
 
     public String getValueAt(Position position) {
         return data.getData().get(position.getRow()).get(position.getColumn());
+    }
+
+    public String getColumnNameAt(int col) {
+        return data.getHeaders().get(col);
     }
 
     public void executeCommand(Command<?, ?> command) {

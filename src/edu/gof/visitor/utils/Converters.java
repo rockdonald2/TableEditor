@@ -8,6 +8,9 @@ import java.util.Optional;
 
 public final class Converters {
 
+    private Converters() {
+    }
+
     public static Optional<Field> tryParseNumberField(String key, String value) {
         try {
             return Optional.of(new NumberField(key, Integer.parseInt(value)));

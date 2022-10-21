@@ -1,6 +1,6 @@
 package edu.gof.visitor.view;
 
-import edu.gof.visitor.command.EditCommand;
+import edu.gof.visitor.command.*;
 import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.service.exception.ServiceException;
@@ -31,17 +31,14 @@ public class MainPanel extends JFrame {
 
     public MainPanel(MainController mainController) {
         this.mainController = mainController;
-        setup();
-    }
 
-    protected void setup() {
         createMenuBar();
         createTable();
         baseConfig();
     }
 
     private void addNewRow(ActionEvent e) {
-        mainController.doAddNewRow();
+        mainController.executeCommand(new AddRowCommand(mainController, new Position(mainController.getRows(), 0)));
     }
 
     private void addNewColumn(ActionEvent actionEvent) {
@@ -52,7 +49,7 @@ public class MainPanel extends JFrame {
             return;
         }
 
-        mainController.doAddNewColumn(columnName);
+        mainController.executeCommand(new AddColumnCommand(mainController, new Position(0, mainController.getColumns()),  columnName));
     }
 
     protected void createTable() {
@@ -71,7 +68,7 @@ public class MainPanel extends JFrame {
                 int rowAtPoint = table.rowAtPoint(point);
 
                 if (rowAtPoint > -1) {
-                    mainController.doDeleteRowAt(rowAtPoint);
+                    mainController.executeCommand(new RemoveRowCommand(mainController, new Position(rowAtPoint, 0)));
                 }
             }
         });
@@ -85,7 +82,7 @@ public class MainPanel extends JFrame {
                 int colAtPoint = table.columnAtPoint(point);
 
                 if (colAtPoint > -1) {
-                    mainController.doDeleteColumnAt(colAtPoint);
+                    mainController.executeCommand(new RemoveColumnCommand(mainController, new Position(0, colAtPoint)));
                 }
             }
         });
@@ -98,7 +95,7 @@ public class MainPanel extends JFrame {
         this.add(scrollPane);
     }
 
-    protected void createMenuBar() {
+    protected void createMenuBar(){
         final JMenuBar menuBar = new JMenuBar();
 
         final JMenu mainMenu = new JMenu("Main Menu");

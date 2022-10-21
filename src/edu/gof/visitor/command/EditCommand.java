@@ -35,11 +35,7 @@ public class EditCommand extends Command<Void, Void> {
 
     private void doEdit(String value) {
         mainController.doModifyValueAt(editPosition.getRow(), editPosition.getColumn(), value);
-
-        DefaultTableModel tableModel = ((DefaultTableModel) table.getModel());
-        var rowVector = tableModel.getDataVector().elementAt(editPosition.getRow());
-        rowVector.setElementAt(value, editPosition.getColumn());
-        tableModel.fireTableCellUpdated(editPosition.getRow(), editPosition.getColumn());
+        mainController.doDisplayData();
     }
 
 }
