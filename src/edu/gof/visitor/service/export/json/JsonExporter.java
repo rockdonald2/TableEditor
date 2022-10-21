@@ -4,23 +4,21 @@ import edu.gof.visitor.model.Field;
 import edu.gof.visitor.model.TextField;
 import edu.gof.visitor.service.export.ExportVisitor;
 import edu.gof.visitor.service.export.Exporter;
-import edu.gof.visitor.service.loader.Data;
 import edu.gof.visitor.utils.Converters;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class JsonExporter implements Exporter {
+public class JsonExporter extends Exporter {
 
     @Override
-    public String exportData(Data data) {
-        List<String> headers = data.getHeaders();
-        List<List<String>> rowData = data.getData();
-        StringBuilder exportedData = new StringBuilder();
+    public ExportVisitor exportVisitor() {
+        return new JsonExportVisitor();
+    }
 
-        final ExportVisitor exporterVisitor = new JsonExportVisitor();
-
+    @Override
+    public void exportLogic(StringBuilder exportedData, List<String> headers, List<List<String>> rowData, ExportVisitor exporterVisitor) {
         AtomicInteger fieldIdx = new AtomicInteger(0);
         AtomicInteger elemIdx = new AtomicInteger(0);
 
@@ -62,8 +60,5 @@ public class JsonExporter implements Exporter {
         });
 
         exportedData.append("]");
-
-        return exportedData.toString();
     }
-
 }
