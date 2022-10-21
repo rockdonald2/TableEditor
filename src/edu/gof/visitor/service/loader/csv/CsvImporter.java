@@ -1,11 +1,12 @@
 package edu.gof.visitor.service.loader.csv;
 
 import edu.gof.visitor.service.exception.ServiceException;
+import edu.gof.visitor.service.iterator.CsvIterator;
+import edu.gof.visitor.service.iterator.Iterator;
 import edu.gof.visitor.service.loader.Data;
 import edu.gof.visitor.service.loader.Importer;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,23 +24,21 @@ public class CsvImporter implements Importer {
             throw new ServiceException("Given file for import does not exists");
         }
 
-        List<String> headers = new ArrayList<>();
+        Iterator<List<String>> iterator;
+        try {
+            iterator = new CsvIterator(file);
+        } catch (FileNotFoundException e) {
+            throw new ServiceException("Exception occurred while processing import file", e);
+        }
+
+        List<String> headers;
         List<List<String>> rowData = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file.toFile()))) {
-            String tempLine;
-            int idx = 0;
+        try {
+            headers = iterator.next();
 
-            while ((tempLine = reader.readLine()) != null) {
-                List<String> values = new ArrayList<>(List.of(tempLine.split(",")));
-
-                if (idx == 0) {
-                    headers = values;
-                } else {
-                    rowData.add(values);
-                }
-
-                ++idx;
+            while (iterator.hasNext()) {
+                rowData.add(iterator.next());
             }
         } catch (IOException e) {
             throw new ServiceException("Exception occurred while processing import file", e);
