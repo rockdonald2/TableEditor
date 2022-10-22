@@ -1,6 +1,8 @@
 package edu.gof.visitor;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.IntelliJTheme;
 import edu.gof.visitor.controller.MainController;
 
 import java.sql.Timestamp;
@@ -12,7 +14,7 @@ public class ApplicationMain {
 
     public static void main(String[] args) {
         log.info(String.format("Application startup at %s", new Timestamp(System.currentTimeMillis())));
-        FlatLightLaf.setup();
+        FlatIntelliJLaf.setup(); // look-and-feel
         new MainController();
     }
 
