@@ -23,22 +23,41 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
-public class MainController {
+public final class MainController {
 
     private static final Logger log = Logger.getLogger(MainController.class.getName());
 
-    private final MainPanel mainPanel;
+    private static MainController instance;
 
     private final Stack<Command<?, ?>> commands = new Stack<>();
     private final Stack<Command<?, ?>> undoCommands = new Stack<>();
 
+    private MainPanel mainPanel;
     private Data data;
+    private boolean initialized;
 
-    public MainController() {
+    private MainController() {
+    }
+
+    public static synchronized MainController instance() {
+        if (instance == null) {
+            instance = new MainController();
+        }
+
+        return instance;
+    }
+
+    public void init() {
+        if (initialized) {
+            throw new IllegalStateException(String.format("%s already initialized", MainPanel.class.getName()));
+        }
+
         log.info("Initialized MainController");
 
         this.data = new CsvData();
-        this.mainPanel = new MainPanel(this);
+        this.mainPanel = MainPanel.instance();
+        this.mainPanel.init();
+        initialized = true;
     }
 
     public int getColumns() {

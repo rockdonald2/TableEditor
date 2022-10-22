@@ -21,20 +21,37 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-public class MainPanel extends JFrame {
+public final class MainPanel extends JFrame {
 
+    private static MainPanel instance;
     private final MainController mainController;
     private JTable table;
     private JMenuItem addRowBtn;
     private JMenuItem addColumnBtn;
     private JMenuItem exportItem;
+    private boolean initialized;
 
-    public MainPanel(MainController mainController) {
+    private MainPanel(MainController mainController) {
         this.mainController = mainController;
+    }
+
+    public static synchronized MainPanel instance() {
+        if (instance == null) {
+            instance = new MainPanel(MainController.instance());
+        }
+
+        return instance;
+    }
+
+    public void init() {
+        if (initialized) {
+            throw new IllegalStateException(String.format("%s already initialized", MainPanel.class.getName()));
+        }
 
         createMenuBar();
         createTable();
         baseConfig();
+        initialized = true;
     }
 
     private void addNewRow(ActionEvent e) {
@@ -49,7 +66,7 @@ public class MainPanel extends JFrame {
             return;
         }
 
-        mainController.executeCommand(new AddColumnCommand(mainController, new Position(0, mainController.getColumns()),  columnName));
+        mainController.executeCommand(new AddColumnCommand(mainController, new Position(0, mainController.getColumns()), columnName));
     }
 
     protected void createTable() {
@@ -95,7 +112,7 @@ public class MainPanel extends JFrame {
         this.add(scrollPane);
     }
 
-    protected void createMenuBar(){
+    protected void createMenuBar() {
         final JMenuBar menuBar = new JMenuBar();
 
         final JMenu mainMenu = new JMenu("Main Menu");
@@ -132,8 +149,7 @@ public class MainPanel extends JFrame {
 
     protected void baseConfig() {
         registerKeyShortcuts();
-
-        this.setLayout(new FlowLayout());
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
