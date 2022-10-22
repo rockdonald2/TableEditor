@@ -149,7 +149,7 @@ public final class MainPanel extends JFrame {
 
     protected void baseConfig() {
         registerKeyShortcuts();
-        
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
@@ -216,7 +216,7 @@ public final class MainPanel extends JFrame {
 
     private void importData(ActionEvent e) {
         final JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter(new FileNameExtensionFilter("Comma-separated values", "csv"));
+        chooser.setFileFilter(new FileNameExtensionFilter("CSV (*.csv)", "csv"));
         chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
         int hasOpened = chooser.showOpenDialog(MainPanel.this);
 
@@ -231,7 +231,7 @@ public final class MainPanel extends JFrame {
     public Optional<File> saveData() throws ServiceException {
         final JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
-        chooser.setFileFilter(new FileNameExtensionFilter("JSON", "json"));
+        chooser.setFileFilter(new FileNameExtensionFilter("JSON (*.json)", "json"));
         int hasOpened = chooser.showSaveDialog(this);
 
         if (hasOpened != JFileChooser.APPROVE_OPTION) {
