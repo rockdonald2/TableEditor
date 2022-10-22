@@ -4,7 +4,7 @@ import edu.gof.visitor.command.*;
 import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.service.exception.ServiceException;
-import edu.gof.visitor.service.loader.Data;
+import edu.gof.visitor.model.Data;
 import edu.gof.visitor.utils.Constants;
 
 import javax.swing.*;

@@ -32,6 +32,7 @@ public class CsvIterator implements Iterator<List<String>> {
         if (currLine == null && nextLine != null) {
             currLine = nextLine;
             nextLine = null;
+            this.bufferedReader.close();
         } else {
             nextLine = bufferedReader.readLine();
         }

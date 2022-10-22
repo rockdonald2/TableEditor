@@ -1,6 +1,6 @@
 package edu.gof.visitor.service.export;
 
-import edu.gof.visitor.service.loader.Data;
+import edu.gof.visitor.model.Data;
 
 import java.util.List;
 

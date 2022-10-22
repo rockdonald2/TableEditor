@@ -1,4 +1,4 @@
-package edu.gof.visitor.service.loader;
+package edu.gof.visitor.model;
 
 import java.util.List;
 

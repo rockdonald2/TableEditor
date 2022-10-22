@@ -1,6 +1,6 @@
-package edu.gof.visitor.service.loader.csv;
+package edu.gof.visitor.model;
 
-import edu.gof.visitor.service.loader.Data;
+import edu.gof.visitor.model.Data;
 
 import java.util.Collections;
 import java.util.List;
