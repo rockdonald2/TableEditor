@@ -21,7 +21,9 @@ import java.util.stream.IntStream;
 public final class MainPanel extends JFrame {
 
     private static MainPanel instance;
+
     private final MainController mainController;
+
     private Table table;
     private JMenuItem addRowBtn;
     private JMenuItem addColumnBtn;
@@ -74,36 +76,14 @@ public final class MainPanel extends JFrame {
     }
 
     private void createMenuBar() {
-        final JMenuBar menuBar = new JMenuBar();
+        final MenuBar menuBar = new MenuBar();
+        final JMenu mainMenu = menuBar.addMenu("Main Menu", KeyEvent.VK_M);
+        final JMenu fileMenu = menuBar.addMenu("File", KeyEvent.VK_F);
 
-        final JMenu mainMenu = new JMenu("Main Menu");
-        mainMenu.setMnemonic(KeyEvent.VK_M);
-        menuBar.add(mainMenu);
-
-        final JMenu fileMenu = new JMenu("File");
-        fileMenu.setMnemonic(KeyEvent.VK_F);
-        menuBar.add(fileMenu);
-
-        final JMenuItem openItem = new JMenuItem("Open Document");
-        openItem.addActionListener(this::importData);
-
-        exportItem = new JMenuItem("Export Table");
-        exportItem.addActionListener(e -> mainController.doExportData());
-        exportItem.setEnabled(false);
-
-        addRowBtn = new JMenuItem("Add Row");
-        addRowBtn.setEnabled(false);
-        addRowBtn.addActionListener(this::addNewRow);
-
-        addColumnBtn = new JMenuItem("Add Column");
-        addColumnBtn.setEnabled(false);
-        addColumnBtn.addActionListener(this::addNewColumn);
-
-        mainMenu.add(openItem);
-        mainMenu.add(exportItem);
-
-        fileMenu.add(addRowBtn);
-        fileMenu.add(addColumnBtn);
+        menuBar.addItemToMenu(mainMenu.getText(), "Open Document", MainPanel.this::importData, true);
+        exportItem = menuBar.addItemToMenu(mainMenu.getText(), "Export Table", e -> mainController.doExportData(), false);
+        addRowBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Row", this::addNewRow, false);
+        addColumnBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Column", this::addNewColumn, false);
 
         this.setJMenuBar(menuBar);
     }
