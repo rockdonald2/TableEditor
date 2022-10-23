@@ -6,17 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="66c56377-4c44-412d-b01f-7a4eb06b66c8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/out.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/out.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/AddColumnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/AddColumnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/EditCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/EditCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/model/CsvData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/CsvData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/loader/csv/CsvImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/loader/csv/CsvImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/utils/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/MenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/menu/MenuBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/TableDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/TableDecorator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,23 +34,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/rockd/Downloads/code-with-quarkus/code-with-quarkus&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/rockd/Downloads/code-with-quarkus/code-with-quarkus",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Workspace\egyetem\mesteri\tervezésiMintákÉsSablonok\projektek\GOF1\GOF1\lib" />
@@ -129,7 +121,10 @@
       <workItem from="1666528770253" duration="54000" />
       <workItem from="1666533146030" duration="61000" />
       <workItem from="1666533237024" duration="3128000" />
-      <workItem from="1666540661781" duration="4263000" />
+      <workItem from="1666540661781" duration="4401000" />
+      <workItem from="1666548952649" duration="262000" />
+      <workItem from="1666549406715" duration="27000" />
+      <workItem from="1666551173525" duration="189000" />
     </task>
     <servers />
   </component>

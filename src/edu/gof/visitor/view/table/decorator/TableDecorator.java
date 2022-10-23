@@ -2,8 +2,8 @@ package edu.gof.visitor.view.table.decorator;
 
 import edu.gof.visitor.view.table.Table;
 
+import javax.swing.*;
 import javax.swing.table.TableModel;
-import java.awt.*;
 
 public abstract class TableDecorator implements Table {
 
@@ -14,7 +14,7 @@ public abstract class TableDecorator implements Table {
     }
 
     @Override
-    public final Component getComponent() {
+    public final JTable getComponent() {
         return table.getComponent();
     }
 
@@ -27,4 +27,5 @@ public abstract class TableDecorator implements Table {
     public TableModel constructModel(String[][] data, String[] headers) {
         return table.constructModel(data, headers);
     }
+
 }

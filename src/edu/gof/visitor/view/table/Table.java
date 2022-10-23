@@ -1,11 +1,11 @@
 package edu.gof.visitor.view.table;
 
+import javax.swing.*;
 import javax.swing.table.TableModel;
-import java.awt.*;
 
 public interface Table {
 
-    Component getComponent();
+    JTable getComponent();
 
     void displayData(TableModel tableModel);
 

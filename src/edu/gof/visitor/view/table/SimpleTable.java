@@ -85,7 +85,7 @@ public class SimpleTable extends JTable implements Table {
     }
 
     @Override
-    public Component getComponent() {
+    public JTable getComponent() {
         return this;
     }
 
