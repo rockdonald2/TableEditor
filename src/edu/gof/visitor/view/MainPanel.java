@@ -1,22 +1,19 @@
 package edu.gof.visitor.view;
 
-import edu.gof.visitor.command.*;
+import edu.gof.visitor.command.AddColumnCommand;
+import edu.gof.visitor.command.AddRowCommand;
 import edu.gof.visitor.controller.MainController;
+import edu.gof.visitor.model.Data;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.service.exception.ServiceException;
-import edu.gof.visitor.model.Data;
 import edu.gof.visitor.utils.Constants;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
-import java.util.EventObject;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -25,7 +22,7 @@ public final class MainPanel extends JFrame {
 
     private static MainPanel instance;
     private final MainController mainController;
-    private JTable table;
+    private Table table;
     private JMenuItem addRowBtn;
     private JMenuItem addColumnBtn;
     private JMenuItem exportItem;
@@ -69,50 +66,14 @@ public final class MainPanel extends JFrame {
         mainController.executeCommand(new AddColumnCommand(mainController, new Position(0, mainController.getColumns()), columnName));
     }
 
-    protected void createTable() {
-        this.table = new JTable();
-        this.table.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
-        this.table.setRowHeight(24);
-        this.table.setModel(new DefaultTableModel(new String[][]{}, new String[]{"...", "..."}));
-
-        final JPopupMenu popupMenu = new JPopupMenu();
-
-        final JMenuItem deleteRowPopupItem = new JMenuItem("Delete Selected Row");
-        deleteRowPopupItem.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                Point point = SwingUtilities.convertPoint(deleteRowPopupItem, new Point(0, 0), table);
-                int rowAtPoint = table.rowAtPoint(point);
-
-                if (rowAtPoint > -1) {
-                    mainController.executeCommand(new RemoveRowCommand(mainController, new Position(rowAtPoint, 0)));
-                }
-            }
-        });
-        popupMenu.add(deleteRowPopupItem);
-
-        final JMenuItem deleteColPopupItem = new JMenuItem("Delete Selected Column");
-        deleteColPopupItem.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                Point point = SwingUtilities.convertPoint(deleteColPopupItem, new Point(0, 0), table);
-                int colAtPoint = table.columnAtPoint(point);
-
-                if (colAtPoint > -1) {
-                    mainController.executeCommand(new RemoveColumnCommand(mainController, new Position(0, colAtPoint)));
-                }
-            }
-        });
-        popupMenu.add(deleteColPopupItem);
-
-        this.table.setComponentPopupMenu(popupMenu);
-
+    private void createTable() {
+        this.table = new Table();
         final JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT));
         this.add(scrollPane);
     }
 
-    protected void createMenuBar() {
+    private void createMenuBar() {
         final JMenuBar menuBar = new JMenuBar();
 
         final JMenu mainMenu = new JMenu("Main Menu");
@@ -147,7 +108,7 @@ public final class MainPanel extends JFrame {
         this.setJMenuBar(menuBar);
     }
 
-    protected void baseConfig() {
+    private void baseConfig() {
         registerKeyShortcuts();
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -156,7 +117,7 @@ public final class MainPanel extends JFrame {
         this.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
     }
 
-    protected void registerKeyShortcuts() {
+    private void registerKeyShortcuts() {
         this.getRootPane().registerKeyboardAction(e -> exportItem.doClick(), KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
         this.getRootPane().registerKeyboardAction(e -> mainController.undoCommand(), KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
         this.getRootPane().registerKeyboardAction(e -> mainController.redoCommand(), KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -180,34 +141,7 @@ public final class MainPanel extends JFrame {
                     tableData[idx] = rowData.get(idx).toArray(new String[]{});
                 });
 
-        DefaultCellEditor editor = new DefaultCellEditor(new JTextField()) {
-            @Override
-            public boolean isCellEditable(EventObject e) {
-                if (e instanceof KeyEvent) {
-                    return startWithKeyEvent((KeyEvent) e);
-                }
-
-                return super.isCellEditable(e);
-            }
-
-            private boolean startWithKeyEvent(KeyEvent e) {
-                if ((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0) {
-                    return false;
-                } else if ((e.getModifiersEx() & KeyEvent.ALT_DOWN_MASK) != 0) {
-                    return false;
-                }
-
-                return true;
-            }
-        };
-
-        this.table.setModel(new DefaultTableModel(tableData, headers.toArray()) {
-            @Override
-            public void setValueAt(Object aValue, int row, int column) {
-                mainController.executeCommand(new EditCommand(mainController, table, aValue.toString(), new Position(row, column)));
-            }
-        });
-        this.table.setDefaultEditor(Object.class, editor);
+        table.displayData(tableData, headers.toArray(new String[]{}));
 
         addRowBtn.setEnabled(true);
         addColumnBtn.setEnabled(true);
