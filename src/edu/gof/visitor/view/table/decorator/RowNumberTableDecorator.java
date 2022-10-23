@@ -1,13 +1,9 @@
 package edu.gof.visitor.view.table.decorator;
 
-import edu.gof.visitor.command.EditCommand;
-import edu.gof.visitor.controller.MainController;
-import edu.gof.visitor.model.Position;
 import edu.gof.visitor.view.table.Table;
+import edu.gof.visitor.view.table.model.CustomTableModel;
+import edu.gof.visitor.view.table.model.decorator.RowNumberedTableModel;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,32 +13,29 @@ public class RowNumberTableDecorator extends TableDecorator {
 
     private String[][] data;
     private String[] headers;
-    private TableModel tableModel;
 
     public RowNumberTableDecorator(Table table) {
         super(table);
     }
 
     @Override
-    public void displayData(TableModel tableModel) {
-        this.tableModel = tableModel;
-
-        getData();
+    public void displayData(CustomTableModel tableModel) {
+        getData(tableModel);
         addRowNumbers();
-        super.displayData(constructModel(this.data, this.headers));
+        super.displayData(this.constructModel(data, headers));
     }
 
-    private void getData() {
-        this.headers = new String[this.tableModel.getColumnCount()];
-        this.data = new String[this.tableModel.getRowCount()][this.headers.length];
+    private void getData(CustomTableModel tableModel) {
+        this.headers = new String[tableModel.getColumnCount()];
+        this.data = new String[tableModel.getRowCount()][this.headers.length];
 
         IntStream.range(0, this.headers.length)
-                .forEach(idx -> headers[idx] = this.tableModel.getColumnName(idx));
+                .forEach(idx -> headers[idx] = tableModel.getColumnName(idx));
         IntStream.range(0, this.data.length)
                 .forEach(rowIdx -> {
                     IntStream.range(0, this.headers.length)
                             .forEach(colIdx -> {
-                                this.data[rowIdx][colIdx] = this.tableModel.getValueAt(rowIdx, colIdx).toString();
+                                this.data[rowIdx][colIdx] = tableModel.getValueAt(rowIdx, colIdx).toString();
                             });
                 });
     }
@@ -68,18 +61,10 @@ public class RowNumberTableDecorator extends TableDecorator {
     }
 
     @Override
-    public TableModel constructModel(String[][] data, String[] headers) {
-        return new DefaultTableModel(data, headers) {
-            @Override
-            public void setValueAt(Object aValue, int row, int column) {
-                MainController.instance().executeCommand(new EditCommand(MainController.instance(), (JTable) RowNumberTableDecorator.this.getComponent(), aValue.toString(), new Position(row, column - 1)));
-            }
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return column != 0;
-            }
-        };
+    public CustomTableModel constructModel(String[][] data, String[] headers) {
+        final CustomTableModel tableModel = new RowNumberedTableModel(super.constructModel(data, headers));
+        tableModel.setDataVector(data, headers);
+        return tableModel;
     }
 
 }

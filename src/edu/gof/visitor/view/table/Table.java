@@ -1,14 +1,15 @@
 package edu.gof.visitor.view.table;
 
+import edu.gof.visitor.view.table.model.CustomTableModel;
+
 import javax.swing.*;
-import javax.swing.table.TableModel;
 
 public interface Table {
 
     JTable getComponent();
 
-    void displayData(TableModel tableModel);
+    void displayData(CustomTableModel tableModel);
 
-    TableModel constructModel(String[][] data, String[] headers);
+    CustomTableModel constructModel(String[][] data, String[] headers);
 
 }

@@ -8,9 +8,9 @@ import edu.gof.visitor.model.Position;
 import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.utils.Constants;
 import edu.gof.visitor.view.menu.MenuBar;
-import edu.gof.visitor.view.table.decorator.RowNumberTableDecorator;
 import edu.gof.visitor.view.table.SimpleTable;
 import edu.gof.visitor.view.table.Table;
+import edu.gof.visitor.view.table.decorator.RowNumberTableDecorator;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -33,6 +33,8 @@ public final class MainPanel extends JFrame {
     private JMenuItem addColumnBtn;
     private JMenuItem exportItem;
     private JCheckBoxMenuItem rowDecoratorBtn;
+
+    // flag
     private boolean initialized;
 
     private MainPanel(MainController mainController) {
@@ -92,9 +94,7 @@ public final class MainPanel extends JFrame {
         addRowBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Row", this::addNewRow, false);
         addColumnBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Column", this::addNewColumn, false);
         rowDecoratorBtn = menuBar.addToggleItemToMenu(othersMenu.getText(), "Add Row Numbering", e -> {
-            AbstractButton btn = (AbstractButton) e.getSource();
-
-            if (btn.isSelected()) {
+            if (((AbstractButton) e.getSource()).isSelected()) {
                 MainPanel.this.table = new RowNumberTableDecorator(MainPanel.this.table);
                 MainPanel.this.mainController.doDisplayData();
             } else {

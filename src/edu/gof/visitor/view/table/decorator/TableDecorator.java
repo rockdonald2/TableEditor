@@ -1,9 +1,9 @@
 package edu.gof.visitor.view.table.decorator;
 
 import edu.gof.visitor.view.table.Table;
+import edu.gof.visitor.view.table.model.CustomTableModel;
 
 import javax.swing.*;
-import javax.swing.table.TableModel;
 
 public abstract class TableDecorator implements Table {
 
@@ -19,12 +19,12 @@ public abstract class TableDecorator implements Table {
     }
 
     @Override
-    public void displayData(TableModel tableModel) {
+    public void displayData(CustomTableModel tableModel) {
         table.displayData(tableModel);
     }
 
     @Override
-    public TableModel constructModel(String[][] data, String[] headers) {
+    public CustomTableModel constructModel(String[][] data, String[] headers) {
         return table.constructModel(data, headers);
     }
 

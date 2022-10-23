@@ -1,15 +1,14 @@
 package edu.gof.visitor.view.table;
 
-import edu.gof.visitor.command.EditCommand;
 import edu.gof.visitor.command.RemoveColumnCommand;
 import edu.gof.visitor.command.RemoveRowCommand;
 import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.utils.Constants;
+import edu.gof.visitor.view.table.model.CustomTableModel;
+import edu.gof.visitor.view.table.model.SimpleTableModel;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -21,7 +20,7 @@ public class SimpleTable extends JTable implements Table {
     public SimpleTable() {
         this.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
         this.setRowHeight(24);
-        this.setModel(new DefaultTableModel(new String[][]{}, new String[]{"...", "..."}));
+        this.setModel(this.constructModel(new String[][]{}, new String[]{"...", "..."}));
         this.setPreferredSize(new Dimension(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT));
         this.getTableHeader().setReorderingAllowed(false);
 
@@ -90,18 +89,13 @@ public class SimpleTable extends JTable implements Table {
     }
 
     @Override
-    public void displayData(TableModel tableModel) {
+    public void displayData(CustomTableModel tableModel) {
         this.setModel(tableModel);
     }
 
     @Override
-    public TableModel constructModel(String[][] data, String[] headers) {
-        return new DefaultTableModel(data, headers) {
-            @Override
-            public void setValueAt(Object aValue, int row, int column) {
-                MainController.instance().executeCommand(new EditCommand(MainController.instance(), SimpleTable.this, aValue.toString(), new Position(row, column)));
-            }
-        };
+    public CustomTableModel constructModel(String[][] data, String[] headers) {
+        return new SimpleTableModel(this, data, headers);
     }
 
 }
