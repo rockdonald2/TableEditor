@@ -1,10 +1,10 @@
 package edu.gof.visitor.service.loader.csv;
 
 import edu.gof.visitor.model.CsvData;
+import edu.gof.visitor.model.Data;
 import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.service.iterator.CsvIterator;
 import edu.gof.visitor.service.iterator.Iterator;
-import edu.gof.visitor.model.Data;
 import edu.gof.visitor.service.loader.Importer;
 
 import java.io.FileNotFoundException;

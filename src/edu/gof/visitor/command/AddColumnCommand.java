@@ -5,7 +5,6 @@ import edu.gof.visitor.model.Position;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class AddColumnCommand extends Command<Void, Void> {
 

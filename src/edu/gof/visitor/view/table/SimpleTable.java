@@ -1,4 +1,4 @@
-package edu.gof.visitor.view;
+package edu.gof.visitor.view.table;
 
 import edu.gof.visitor.command.EditCommand;
 import edu.gof.visitor.command.RemoveColumnCommand;
@@ -9,18 +9,21 @@ import edu.gof.visitor.utils.Constants;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
 
-public class Table extends JTable {
+public class SimpleTable extends JTable implements Table {
 
-    public Table() {
+    public SimpleTable() {
         this.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
         this.setRowHeight(24);
         this.setModel(new DefaultTableModel(new String[][]{}, new String[]{"...", "..."}));
+        this.setPreferredSize(new Dimension(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT));
+        this.getTableHeader().setReorderingAllowed(false);
 
         addPopup();
         addEditor();
@@ -40,11 +43,7 @@ public class Table extends JTable {
             private boolean startWithKeyEvent(KeyEvent e) {
                 if ((e.getModifiersEx() & KeyEvent.CTRL_DOWN_MASK) != 0) {
                     return false;
-                } else if ((e.getModifiersEx() & KeyEvent.ALT_DOWN_MASK) != 0) {
-                    return false;
-                }
-
-                return true;
+                } else return (e.getModifiersEx() & KeyEvent.ALT_DOWN_MASK) == 0;
             }
         };
 
@@ -58,8 +57,8 @@ public class Table extends JTable {
         deleteRowPopupItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                Point point = SwingUtilities.convertPoint(deleteRowPopupItem, new Point(0, 0), Table.this);
-                int rowAtPoint = Table.this.rowAtPoint(point);
+                Point point = SwingUtilities.convertPoint(deleteRowPopupItem, new Point(0, 0), SimpleTable.this);
+                int rowAtPoint = SimpleTable.this.rowAtPoint(point);
 
                 if (rowAtPoint > -1) {
                     MainController.instance().executeCommand(new RemoveRowCommand(MainController.instance(), new Position(rowAtPoint, 0)));
@@ -72,8 +71,8 @@ public class Table extends JTable {
         deleteColPopupItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                Point point = SwingUtilities.convertPoint(deleteColPopupItem, new Point(0, 0), Table.this);
-                int colAtPoint = Table.this.columnAtPoint(point);
+                Point point = SwingUtilities.convertPoint(deleteColPopupItem, new Point(0, 0), SimpleTable.this);
+                int colAtPoint = SimpleTable.this.columnAtPoint(point);
 
                 if (colAtPoint > -1) {
                     MainController.instance().executeCommand(new RemoveColumnCommand(MainController.instance(), new Position(0, colAtPoint)));
@@ -85,13 +84,24 @@ public class Table extends JTable {
         this.setComponentPopupMenu(popupMenu);
     }
 
-    public void displayData(String[][] data, String[] headers) {
-        this.setModel(new DefaultTableModel(data, headers) {
+    @Override
+    public Component getComponent() {
+        return this;
+    }
+
+    @Override
+    public void displayData(TableModel tableModel) {
+        this.setModel(tableModel);
+    }
+
+    @Override
+    public TableModel constructModel(String[][] data, String[] headers) {
+        return new DefaultTableModel(data, headers) {
             @Override
             public void setValueAt(Object aValue, int row, int column) {
-                MainController.instance().executeCommand(new EditCommand(MainController.instance(), Table.this, aValue.toString(), new Position(row, column)));
+                MainController.instance().executeCommand(new EditCommand(MainController.instance(), SimpleTable.this, aValue.toString(), new Position(row, column)));
             }
-        });
+        };
     }
 
 }

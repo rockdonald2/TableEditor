@@ -1,7 +1,5 @@
 package edu.gof.visitor.model;
 
-import edu.gof.visitor.model.Data;
-
 import java.util.Collections;
 import java.util.List;
 

@@ -7,6 +7,10 @@ import edu.gof.visitor.model.Data;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.utils.Constants;
+import edu.gof.visitor.view.menu.MenuBar;
+import edu.gof.visitor.view.table.decorator.RowNumberTableDecorator;
+import edu.gof.visitor.view.table.SimpleTable;
+import edu.gof.visitor.view.table.Table;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -28,6 +32,7 @@ public final class MainPanel extends JFrame {
     private JMenuItem addRowBtn;
     private JMenuItem addColumnBtn;
     private JMenuItem exportItem;
+    private JCheckBoxMenuItem rowDecoratorBtn;
     private boolean initialized;
 
     private MainPanel(MainController mainController) {
@@ -69,21 +74,34 @@ public final class MainPanel extends JFrame {
     }
 
     private void createTable() {
-        this.table = new Table();
-        final JScrollPane scrollPane = new JScrollPane(table);
+        this.table = new SimpleTable();
+        final JScrollPane scrollPane = new JScrollPane(table.getComponent());
         scrollPane.setPreferredSize(new Dimension(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT));
         this.add(scrollPane);
     }
 
     private void createMenuBar() {
-        final MenuBar menuBar = new MenuBar();
+        final edu.gof.visitor.view.menu.MenuBar menuBar = new MenuBar();
+
         final JMenu mainMenu = menuBar.addMenu("Main Menu", KeyEvent.VK_M);
         final JMenu fileMenu = menuBar.addMenu("File", KeyEvent.VK_F);
+        final JMenu othersMenu = menuBar.addMenu("Others", KeyEvent.VK_O);
 
         menuBar.addItemToMenu(mainMenu.getText(), "Open Document", MainPanel.this::importData, true);
         exportItem = menuBar.addItemToMenu(mainMenu.getText(), "Export Table", e -> mainController.doExportData(), false);
         addRowBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Row", this::addNewRow, false);
         addColumnBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Column", this::addNewColumn, false);
+        rowDecoratorBtn = menuBar.addToggleItemToMenu(othersMenu.getText(), "Add Row Numbering", e -> {
+            AbstractButton btn = (AbstractButton) e.getSource();
+
+            if (btn.isSelected()) {
+                MainPanel.this.table = new RowNumberTableDecorator(MainPanel.this.table);
+                MainPanel.this.mainController.doDisplayData();
+            } else {
+                MainPanel.this.table = (Table) MainPanel.this.table.getComponent();
+                MainPanel.this.mainController.doDisplayData();
+            }
+        }, false);
 
         this.setJMenuBar(menuBar);
     }
@@ -121,11 +139,12 @@ public final class MainPanel extends JFrame {
                     tableData[idx] = rowData.get(idx).toArray(new String[]{});
                 });
 
-        table.displayData(tableData, headers.toArray(new String[]{}));
+        table.displayData(table.constructModel(tableData, headers.toArray(new String[]{})));
 
         addRowBtn.setEnabled(true);
         addColumnBtn.setEnabled(true);
         exportItem.setEnabled(true);
+        rowDecoratorBtn.setEnabled(true);
     }
 
     private void importData(ActionEvent e) {

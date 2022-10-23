@@ -1,4 +1,4 @@
-package edu.gof.visitor.view;
+package edu.gof.visitor.view.menu;
 
 import edu.gof.visitor.view.exception.ViewException;
 
@@ -42,6 +42,21 @@ public class MenuBar extends JMenuBar {
         menu.add(menuItem);
 
         return menuItem;
+    }
+
+    public JCheckBoxMenuItem addToggleItemToMenu(String menuName, String itemName, ActionListener listener, boolean enabled) {
+        if (!menus.containsKey(menuName)) {
+            throw new ViewException("Non-existing menu given");
+        }
+
+        final JMenu menu = menus.get(menuName);
+
+        final JCheckBoxMenuItem toggleButton = new JCheckBoxMenuItem(itemName);
+        toggleButton.addActionListener(listener);
+        toggleButton.setEnabled(enabled);
+        menu.add(toggleButton);
+
+        return toggleButton;
     }
 
 }

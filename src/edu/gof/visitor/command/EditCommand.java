@@ -4,7 +4,6 @@ import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Position;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 public class EditCommand extends Command<Void, Void> {
 

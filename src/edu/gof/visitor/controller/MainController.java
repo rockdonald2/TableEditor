@@ -1,13 +1,13 @@
 package edu.gof.visitor.controller;
 
 import edu.gof.visitor.command.Command;
+import edu.gof.visitor.model.CsvData;
+import edu.gof.visitor.model.Data;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.service.export.Exporter;
 import edu.gof.visitor.service.export.json.JsonExporter;
-import edu.gof.visitor.model.Data;
 import edu.gof.visitor.service.loader.Importer;
-import edu.gof.visitor.model.CsvData;
 import edu.gof.visitor.service.loader.csv.CsvImporter;
 import edu.gof.visitor.utils.Util;
 import edu.gof.visitor.view.MainPanel;
