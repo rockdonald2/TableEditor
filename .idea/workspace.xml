@@ -6,27 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="66c56377-4c44-412d-b01f-7a4eb06b66c8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/clients.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/clients.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/out.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/out.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/AddColumnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/AddColumnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/AddRowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/AddRowCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/EditCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/EditCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/RemoveColumnCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/RemoveColumnCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/command/RemoveRowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/command/RemoveRowCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/model/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/Field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/Exporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/Exporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/menu/MenuBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/menu/MenuBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/iterator/CsvIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/iterator/CsvIterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/iterator/Iterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/iterator/Iterator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/loader/csv/CsvImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/loader/csv/CsvImporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/RowNumberTableDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/RowNumberTableDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/TableDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/TableDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/model/CustomTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/model/CustomTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/model/SimpleTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/model/SimpleTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/model/decorator/RowNumberedTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/model/decorator/RowNumberedTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/model/decorator/TableModelDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/model/decorator/TableModelDecorator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +133,7 @@
       <workItem from="1666552994056" duration="3063000" />
       <workItem from="1666636657517" duration="597000" />
       <workItem from="1666721341724" duration="636000" />
-      <workItem from="1666722307726" duration="8568000" />
+      <workItem from="1666722307726" duration="9452000" />
     </task>
     <servers />
   </component>

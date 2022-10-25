@@ -7,7 +7,6 @@ import edu.gof.visitor.service.iterator.CsvIterator;
 import edu.gof.visitor.service.iterator.Iterator;
 import edu.gof.visitor.service.loader.Importer;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,21 +27,17 @@ public class CsvImporter implements Importer {
         Iterator<List<String>> iterator;
         try {
             iterator = new CsvIterator(file);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new ServiceException("Exception occurred while processing import file", e);
         }
 
         List<String> headers;
         List<List<String>> rowData = new ArrayList<>();
 
-        try {
-            headers = iterator.next();
+        headers = iterator.next();
 
-            while (iterator.hasNext()) {
-                rowData.add(iterator.next());
-            }
-        } catch (IOException e) {
-            throw new ServiceException("Exception occurred while processing import file", e);
+        while (iterator.hasNext()) {
+            rowData.add(iterator.next());
         }
 
         data.setData(rowData);

@@ -81,8 +81,7 @@ public class RowNumberTableDecorator extends TableDecorator {
     private void updateRowNumbers() {
         if (resetCalled) {
             return;
-        }
-        else if (!"#".equals(MainController.instance().getColumnNameAt(0))) {
+        } else if (!"#".equals(MainController.instance().getColumnNameAt(0))) {
             throw new IllegalStateException("Illegal to update non-existing row numbers");
         }
 

@@ -1,11 +1,9 @@
 package edu.gof.visitor.service.iterator;
 
-import java.io.IOException;
-
 public interface Iterator<T> {
 
-    boolean hasNext() throws IOException;
+    boolean hasNext();
 
-    T next() throws IOException;
+    T next();
 
 }

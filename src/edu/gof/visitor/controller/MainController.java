@@ -253,14 +253,18 @@ public final class MainController {
             switch (orientation) {
                 case INCREASE -> {
                     switch (which) {
-                        case ROW -> positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() + offset);
-                        case COLUMN -> positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() + offset);
+                        case ROW ->
+                                positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() + offset);
+                        case COLUMN ->
+                                positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() + offset);
                     }
                 }
                 case DECREASE -> {
                     switch (which) {
-                        case ROW -> positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() - offset);
-                        case COLUMN -> positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() - offset);
+                        case ROW ->
+                                positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() - offset);
+                        case COLUMN ->
+                                positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() - offset);
                     }
                 }
             }
