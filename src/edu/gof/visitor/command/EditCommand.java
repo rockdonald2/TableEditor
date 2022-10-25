@@ -3,20 +3,15 @@ package edu.gof.visitor.command;
 import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Position;
 
-import javax.swing.*;
+public class EditCommand extends PositionBasedCommand<Void, Void> {
 
-public class EditCommand extends Command<Void, Void> {
 
-    private final Position editPosition;
-    private final JTable table;
     private final String prevValue;
     private final String editValue;
 
-    public EditCommand(MainController mainController, JTable table, String editValue, Position position) {
-        super(mainController);
+    public EditCommand(MainController mainController, String editValue, Position position) {
+        super(mainController, position);
         this.editValue = editValue;
-        this.editPosition = position;
-        this.table = table;
         this.prevValue = mainController.getValueAt(position);
     }
 

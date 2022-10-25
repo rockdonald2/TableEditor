@@ -6,7 +6,7 @@ public abstract class Command<ExecReturn, UnexecReturn> {
 
     protected final MainController mainController;
 
-    public Command(MainController mainController) {
+    protected Command(MainController mainController) {
         this.mainController = mainController;
     }
 

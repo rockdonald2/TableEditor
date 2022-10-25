@@ -8,7 +8,7 @@ public abstract class TableModelDecorator extends CustomTableModel {
 
     private final CustomTableModel tableModel;
 
-    public TableModelDecorator(CustomTableModel tableModel) {
+    protected TableModelDecorator(CustomTableModel tableModel) {
         this.tableModel = tableModel;
     }
 

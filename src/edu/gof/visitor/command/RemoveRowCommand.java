@@ -6,15 +6,12 @@ import edu.gof.visitor.model.Position;
 import java.util.Collections;
 import java.util.List;
 
-public class RemoveRowCommand extends Command<Void, Void> {
-
-    private final Position editPosition;
+public class RemoveRowCommand extends PositionBasedCommand<Void, Void> {
 
     private List<String> lostData = Collections.emptyList();
 
     public RemoveRowCommand(MainController mainController, Position position) {
-        super(mainController);
-        this.editPosition = position;
+        super(mainController, position);
     }
 
     @Override

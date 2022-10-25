@@ -4,10 +4,10 @@ import javax.swing.table.DefaultTableModel;
 
 public abstract class CustomTableModel extends DefaultTableModel {
 
-    public CustomTableModel() {
+    protected CustomTableModel() {
     }
 
-    public CustomTableModel(String[][] data, String[] headers) {
+    protected CustomTableModel(String[][] data, String[] headers) {
         super(data, headers);
     }
 

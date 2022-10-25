@@ -15,9 +15,7 @@ public class ApplicationMain {
         log.info(String.format("Application startup at %s", new Timestamp(System.currentTimeMillis())));
         FlatLightLaf.setup(); // look-and-feel
 
-        SwingUtilities.invokeLater(() -> {
-            MainController.instance().init();
-        });
+        SwingUtilities.invokeLater(() -> MainController.instance().init());
     }
 
 }

@@ -1,6 +1,7 @@
 package edu.gof.visitor.controller;
 
 import edu.gof.visitor.command.Command;
+import edu.gof.visitor.command.PositionBasedCommand;
 import edu.gof.visitor.model.CsvData;
 import edu.gof.visitor.model.Data;
 import edu.gof.visitor.model.Position;
@@ -15,10 +16,7 @@ import edu.gof.visitor.view.MainPanel;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
@@ -29,8 +27,8 @@ public final class MainController {
 
     private static MainController instance;
 
-    private final Stack<Command<?, ?>> commands = new Stack<>();
-    private final Stack<Command<?, ?>> undoCommands = new Stack<>();
+    private final Deque<Command<?, ?>> commands = new ArrayDeque<>();
+    private final Deque<Command<?, ?>> undoCommands = new ArrayDeque<>();
 
     private MainPanel mainPanel;
     private Data data;
@@ -117,10 +115,10 @@ public final class MainController {
                 return;
             }
 
-            final String data = exportData(extension.get());
+            final String dataStr = exportData(extension.get());
 
-            try {
-                Files.writeString(saveFile.toPath(), data);
+            try { // NOSONAR; intentionally
+                Files.writeString(saveFile.toPath(), dataStr);
                 mainPanel.showInfo("Successfully exported data");
             } catch (IOException e) {
                 throw new ServiceException("Failed to save data", e);
@@ -209,11 +207,23 @@ public final class MainController {
         return data.getHeaders().get(col);
     }
 
+    public void setHeaders(String[] headers) {
+        data.setHeaders(new ArrayList<>(List.of(headers)));
+    }
+
+    public void addValueAt(int rowIdx, int colIdx, String value) {
+        data.getData().get(rowIdx).add(colIdx, value);
+    }
+
+    public void setValueAt(int rowIdx, int colIdx, String value) {
+        data.getData().get(rowIdx).set(colIdx, value);
+    }
+
     public void executeCommand(Command<?, ?> command) {
         commands.push(command);
         command.execute();
 
-        while (!undoCommands.empty()) undoCommands.pop();
+        while (!undoCommands.isEmpty()) undoCommands.pop();
     }
 
     public void undoCommand() {
@@ -222,6 +232,7 @@ public final class MainController {
             undoCommands.push(undo);
             undo.unexecute();
         } catch (RuntimeException ignored) {
+            // ignored
         }
     }
 
@@ -231,7 +242,29 @@ public final class MainController {
             commands.push(redo);
             redo.execute();
         } catch (RuntimeException ignored) {
+            // ignored
         }
+    }
+
+    public void updateCommands(PositionBasedCommand.Orientation orientation, PositionBasedCommand.Which which, int offset) {
+        commands.iterator().forEachRemaining(cmd -> {
+            if (!(cmd instanceof final PositionBasedCommand<?, ?> positionBasedCmd)) return;
+
+            switch (orientation) {
+                case INCREASE -> {
+                    switch (which) {
+                        case ROW -> positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() + offset);
+                        case COLUMN -> positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() + offset);
+                    }
+                }
+                case DECREASE -> {
+                    switch (which) {
+                        case ROW -> positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() - offset);
+                        case COLUMN -> positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() - offset);
+                    }
+                }
+            }
+        });
     }
 
 }

@@ -5,6 +5,8 @@ import edu.gof.visitor.command.RemoveRowCommand;
 import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.utils.Constants;
+import edu.gof.visitor.view.MainPanel;
+import edu.gof.visitor.view.table.decorator.RowNumberTableDecorator;
 import edu.gof.visitor.view.table.model.CustomTableModel;
 import edu.gof.visitor.view.table.model.SimpleTableModel;
 
@@ -32,8 +34,8 @@ public class SimpleTable extends JTable implements Table {
         DefaultCellEditor editor = new DefaultCellEditor(new JTextField()) {
             @Override
             public boolean isCellEditable(EventObject e) {
-                if (e instanceof KeyEvent) {
-                    return startWithKeyEvent((KeyEvent) e);
+                if (e instanceof KeyEvent keyEvent) {
+                    return startWithKeyEvent(keyEvent);
                 }
 
                 return super.isCellEditable(e);
@@ -74,6 +76,11 @@ public class SimpleTable extends JTable implements Table {
                 int colAtPoint = SimpleTable.this.columnAtPoint(point);
 
                 if (colAtPoint > -1) {
+                    if (isProtectedColumn(colAtPoint)) {
+                        MainPanel.instance().showError("Cannot delete row number column");
+                        return;
+                    }
+
                     MainController.instance().executeCommand(new RemoveColumnCommand(MainController.instance(), new Position(0, colAtPoint)));
                 }
             }
@@ -81,6 +88,10 @@ public class SimpleTable extends JTable implements Table {
         popupMenu.add(deleteColPopupItem);
 
         this.setComponentPopupMenu(popupMenu);
+    }
+
+    private boolean isProtectedColumn(int colIdx) {
+        return MainPanel.instance().getTable() instanceof RowNumberTableDecorator && colIdx == 0;
     }
 
     @Override
@@ -95,7 +106,7 @@ public class SimpleTable extends JTable implements Table {
 
     @Override
     public CustomTableModel constructModel(String[][] data, String[] headers) {
-        return new SimpleTableModel(this, data, headers);
+        return new SimpleTableModel(data, headers);
     }
 
 }

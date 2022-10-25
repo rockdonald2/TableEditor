@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class MenuBar extends JMenuBar {
 
-    final Map<String, JMenu> menus;
+    private final Map<String, JMenu> menus;
 
     public MenuBar() {
         this.menus = new HashMap<>();

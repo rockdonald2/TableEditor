@@ -5,7 +5,6 @@ import edu.gof.visitor.command.AddRowCommand;
 import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Data;
 import edu.gof.visitor.model.Position;
-import edu.gof.visitor.service.exception.ServiceException;
 import edu.gof.visitor.utils.Constants;
 import edu.gof.visitor.view.menu.MenuBar;
 import edu.gof.visitor.view.table.SimpleTable;
@@ -60,6 +59,10 @@ public final class MainPanel extends JFrame {
         initialized = true;
     }
 
+    public Table getTable() {
+        return table;
+    }
+
     private void addNewRow(ActionEvent e) {
         mainController.executeCommand(new AddRowCommand(mainController, new Position(mainController.getRows(), 0)));
     }
@@ -98,8 +101,11 @@ public final class MainPanel extends JFrame {
                 MainPanel.this.table = new RowNumberTableDecorator(MainPanel.this.table);
                 MainPanel.this.mainController.doDisplayData();
             } else {
+                if (MainPanel.this.table instanceof RowNumberTableDecorator rowNumberTableDecorator) {
+                    rowNumberTableDecorator.resetModel();
+                }
+
                 MainPanel.this.table = (Table) MainPanel.this.table.getComponent();
-                MainPanel.this.mainController.doDisplayData();
             }
         }, false);
 
@@ -161,7 +167,7 @@ public final class MainPanel extends JFrame {
         mainController.doImportData(selectedFile.getAbsolutePath());
     }
 
-    public Optional<File> saveData() throws ServiceException {
+    public Optional<File> saveData() {
         final JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
         chooser.setFileFilter(new FileNameExtensionFilter("JSON (*.json)", "json"));

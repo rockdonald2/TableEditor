@@ -9,7 +9,7 @@ public abstract class TableDecorator implements Table {
 
     private final Table table;
 
-    public TableDecorator(Table table) {
+    protected TableDecorator(Table table) {
         this.table = table;
     }
 
@@ -27,5 +27,7 @@ public abstract class TableDecorator implements Table {
     public CustomTableModel constructModel(String[][] data, String[] headers) {
         return table.constructModel(data, headers);
     }
+
+    public abstract void resetModel();
 
 }

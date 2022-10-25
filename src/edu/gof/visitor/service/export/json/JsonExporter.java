@@ -18,6 +18,21 @@ public class JsonExporter extends Exporter {
     }
 
     @Override
+    public Field parseField(String key, String value) {
+        Optional<Field> field = Converters.tryParseNumberField(key, value);
+
+        if (field.isEmpty()) {
+            field = Converters.tryParseDecimalField(key, value);
+        }
+
+        if (field.isEmpty()) {
+            field = Optional.of(new TextField(key, value));
+        }
+
+        return field.get();
+    }
+
+    @Override
     public void exportLogic(StringBuilder exportedData, List<String> headers, List<List<String>> rowData, ExportVisitor exporterVisitor) {
         AtomicInteger fieldIdx = new AtomicInteger(0);
         AtomicInteger elemIdx = new AtomicInteger(0);
@@ -29,19 +44,9 @@ public class JsonExporter extends Exporter {
 
             row.forEach(value -> {
                 String key = headers.get(fieldIdx.get());
-                Optional<Field> field;
+                Field field = parseField(key, value);
 
-                field = Converters.tryParseNumberField(key, value);
-
-                if (field.isEmpty()) {
-                    field = Converters.tryParseDecimalField(key, value);
-                }
-
-                if (field.isEmpty()) {
-                    field = Optional.of(new TextField(key, value));
-                }
-
-                exportedData.append(field.get().accept(exporterVisitor));
+                exportedData.append(field.accept(exporterVisitor));
 
                 if (fieldIdx.get() < (headers.size() - 1)) {
                     exportedData.append(",");
@@ -61,4 +66,5 @@ public class JsonExporter extends Exporter {
 
         exportedData.append("]");
     }
+
 }

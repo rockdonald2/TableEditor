@@ -6,7 +6,7 @@ public abstract class Field {
 
     protected String key;
 
-    public Field(String key) {
+    protected Field(String key) {
         this.key = key;
     }
 
