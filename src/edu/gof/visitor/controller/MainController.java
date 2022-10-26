@@ -223,7 +223,9 @@ public final class MainController {
         commands.push(command);
         command.execute();
 
-        while (!undoCommands.isEmpty()) undoCommands.pop();
+        if (!undoCommands.isEmpty()) {
+            undoCommands.clear();
+        }
     }
 
     public void undoCommand() {

@@ -79,6 +79,20 @@ public final class MainPanel extends JFrame {
         mainController.executeCommand(new AddColumnCommand(mainController, new Position(0, mainController.getColumns()), columnName));
     }
 
+    private void toggleRowNumbering(ActionEvent e) {
+        if (((AbstractButton) e.getSource()).isSelected()) {
+            MainPanel.this.table = new RowNumberTableDecorator(MainPanel.this.table);
+            MainPanel.this.mainController.doDisplayData();
+        } else {
+            if (MainPanel.this.table instanceof ResettableTableDecorator resettableTableDecorator) {
+                resettableTableDecorator.resetModel();
+            }
+
+            MainPanel.this.table = (Table) MainPanel.this.table.getComponent();
+            MainPanel.this.mainController.doDisplayData();
+        }
+    }
+
     private void createTable() {
         this.table = new SimpleTable();
         final JScrollPane scrollPane = new JScrollPane(table.getComponent());
@@ -97,19 +111,7 @@ public final class MainPanel extends JFrame {
         exportItem = menuBar.addItemToMenu(mainMenu.getText(), "Export Table", e -> mainController.doExportData(), false);
         addRowBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Row", this::addNewRow, false);
         addColumnBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Column", this::addNewColumn, false);
-        rowDecoratorBtn = menuBar.addToggleItemToMenu(othersMenu.getText(), "Add Row Numbering", e -> {
-            if (((AbstractButton) e.getSource()).isSelected()) {
-                MainPanel.this.table = new RowNumberTableDecorator(MainPanel.this.table);
-                MainPanel.this.mainController.doDisplayData();
-            } else {
-                if (MainPanel.this.table instanceof ResettableTableDecorator resettableTableDecorator) {
-                    resettableTableDecorator.resetModel();
-                }
-
-                MainPanel.this.table = (Table) MainPanel.this.table.getComponent();
-                MainPanel.this.mainController.doDisplayData();
-            }
-        }, false);
+        rowDecoratorBtn = menuBar.addToggleItemToMenu(othersMenu.getText(), "Add Row Numbering", this::toggleRowNumbering, false);
 
         this.setJMenuBar(menuBar);
     }
@@ -143,9 +145,7 @@ public final class MainPanel extends JFrame {
 
         String[][] tableData = new String[rowData.size()][headers.size()];
         IntStream.range(0, rowData.size())
-                .forEach(idx -> {
-                    tableData[idx] = rowData.get(idx).toArray(new String[]{});
-                });
+                .forEach(idx -> tableData[idx] = rowData.get(idx).toArray(new String[]{}));
 
         table.displayData(table.constructModel(tableData, headers.toArray(new String[]{})));
 

@@ -5,14 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66c56377-4c44-412d-b01f-7a4eb06b66c8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/e/bef3cf667904a96cb3fae36f21d2b9520b36660e" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/clients.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/clients.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/out.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/out.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/RowNumberTableDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/RowNumberTableDecorator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/TableDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/TableDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/ProtectedFieldTableDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/decorator/ProtectedFieldTableDecorator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +51,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -134,7 +134,12 @@
       <workItem from="1666636657517" duration="597000" />
       <workItem from="1666721341724" duration="636000" />
       <workItem from="1666722307726" duration="9452000" />
-      <workItem from="1666760615439" duration="2009000" />
+      <workItem from="1666760615439" duration="2761000" />
+      <workItem from="1666782016073" duration="391000" />
+      <workItem from="1666804171945" duration="76000" />
+      <workItem from="1666804259487" duration="52000" />
+      <workItem from="1666805250986" duration="815000" />
+      <workItem from="1666806102772" duration="130000" />
     </task>
     <servers />
   </component>

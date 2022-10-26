@@ -1,3 +1,9 @@
 
-:
-java:S2629"$Invoke method(s) only conditionally.(Ï¦õØ
+A
+java:S2629"$Invoke method(s) only conditionally.(Ï¦õØ8›“«Á0
+[
+java:S1128"?Remove this unused import 'com.formdev.flatlaf.FlatDarculaLaf'.(´á‚I8¿±‘«Á0
+^
+java:S1128"<Remove this unused import 'com.formdev.flatlaf.FlatDarkLaf'.(ÄİÓäûÿÿÿÿ8±¡’«Á0
+\
+java:S1128"@Remove this unused import 'com.formdev.flatlaf.FlatIntelliJLaf'.(šÉË@8¿±‘«Á0

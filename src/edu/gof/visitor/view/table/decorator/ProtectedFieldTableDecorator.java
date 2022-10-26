@@ -10,4 +10,5 @@ public abstract class ProtectedFieldTableDecorator extends ResettableTableDecora
     }
 
     public abstract Position getProtectedPosition();
+
 }
