@@ -6,6 +6,7 @@ import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.utils.Constants;
 import edu.gof.visitor.view.MainPanel;
+import edu.gof.visitor.view.table.decorator.ProtectedFieldTableDecorator;
 import edu.gof.visitor.view.table.decorator.RowNumberTableDecorator;
 import edu.gof.visitor.view.table.model.CustomTableModel;
 import edu.gof.visitor.view.table.model.SimpleTableModel;
@@ -77,7 +78,7 @@ public class SimpleTable extends JTable implements Table {
 
                 if (colAtPoint > -1) {
                     if (isProtectedColumn(colAtPoint)) {
-                        MainPanel.instance().showError("Cannot delete row number column");
+                        MainPanel.instance().showError("Cannot delete protected column");
                         return;
                     }
 
@@ -91,7 +92,13 @@ public class SimpleTable extends JTable implements Table {
     }
 
     private boolean isProtectedColumn(int colIdx) {
-        return MainPanel.instance().getTable() instanceof RowNumberTableDecorator && colIdx == 0;
+        if (!(MainPanel.instance().getTable() instanceof ProtectedFieldTableDecorator protectedFieldTableDecorator)) {
+            return false;
+        }
+
+        final Position position = protectedFieldTableDecorator.getProtectedPosition();
+
+        return position.getColumn() == colIdx;
     }
 
     @Override

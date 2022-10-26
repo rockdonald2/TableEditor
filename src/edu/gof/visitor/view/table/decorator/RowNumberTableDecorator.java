@@ -2,6 +2,7 @@ package edu.gof.visitor.view.table.decorator;
 
 import edu.gof.visitor.command.PositionBasedCommand;
 import edu.gof.visitor.controller.MainController;
+import edu.gof.visitor.model.Position;
 import edu.gof.visitor.view.table.Table;
 import edu.gof.visitor.view.table.model.CustomTableModel;
 import edu.gof.visitor.view.table.model.decorator.RowNumberedTableModel;
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class RowNumberTableDecorator extends TableDecorator {
+public class RowNumberTableDecorator extends ProtectedFieldTableDecorator {
 
     private String[][] data;
     private String[] headers;
@@ -20,6 +21,11 @@ public class RowNumberTableDecorator extends TableDecorator {
 
     public RowNumberTableDecorator(Table table) {
         super(table);
+    }
+
+    @Override
+    public Position getProtectedPosition() {
+        return new Position(-1, 0);
     }
 
     @Override

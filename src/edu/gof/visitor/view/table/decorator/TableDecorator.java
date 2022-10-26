@@ -28,6 +28,4 @@ public abstract class TableDecorator implements Table {
         return table.constructModel(data, headers);
     }
 
-    public abstract void resetModel();
-
 }

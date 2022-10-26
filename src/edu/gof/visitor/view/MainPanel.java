@@ -9,6 +9,7 @@ import edu.gof.visitor.utils.Constants;
 import edu.gof.visitor.view.menu.MenuBar;
 import edu.gof.visitor.view.table.SimpleTable;
 import edu.gof.visitor.view.table.Table;
+import edu.gof.visitor.view.table.decorator.ResettableTableDecorator;
 import edu.gof.visitor.view.table.decorator.RowNumberTableDecorator;
 
 import javax.swing.*;
@@ -101,11 +102,12 @@ public final class MainPanel extends JFrame {
                 MainPanel.this.table = new RowNumberTableDecorator(MainPanel.this.table);
                 MainPanel.this.mainController.doDisplayData();
             } else {
-                if (MainPanel.this.table instanceof RowNumberTableDecorator rowNumberTableDecorator) {
-                    rowNumberTableDecorator.resetModel();
+                if (MainPanel.this.table instanceof ResettableTableDecorator resettableTableDecorator) {
+                    resettableTableDecorator.resetModel();
                 }
 
                 MainPanel.this.table = (Table) MainPanel.this.table.getComponent();
+                MainPanel.this.mainController.doDisplayData();
             }
         }, false);
 
