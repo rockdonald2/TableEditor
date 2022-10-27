@@ -199,6 +199,29 @@ public final class MainController {
         doDisplayData();
     }
 
+    public void doSearch() {
+        Optional<String> searchWord = mainPanel.getSearchInput();
+
+        if (searchWord.isEmpty()) {
+            return;
+        }
+
+        Position position = null;
+        final List<List<String>> tmpData = data.getData();
+        for (int i = 0; i < tmpData.size(); ++i) {
+            for (int j = 0; j < data.getHeaders().size(); ++j) {
+                if (tmpData.get(i).get(j).contains(searchWord.get())) {
+                    position = new Position(i, j);
+                    break;
+                }
+            }
+        }
+
+        if (position != null) {
+            mainPanel.selectCell(position);
+        }
+    }
+
     public String getValueAt(Position position) {
         return data.getData().get(position.getRow()).get(position.getColumn());
     }

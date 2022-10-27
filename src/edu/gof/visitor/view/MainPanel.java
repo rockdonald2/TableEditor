@@ -68,7 +68,7 @@ public final class MainPanel extends JFrame {
         mainController.executeCommand(new AddRowCommand(mainController, new Position(mainController.getRows(), 0)));
     }
 
-    private void addNewColumn(ActionEvent actionEvent) {
+    private void addNewColumn(ActionEvent e) {
         String columnName = JOptionPane.showInputDialog(this, "Specify the name of the new column");
 
         if (columnName == null || columnName.isBlank()) {
@@ -129,6 +129,7 @@ public final class MainPanel extends JFrame {
         this.getRootPane().registerKeyboardAction(e -> exportItem.doClick(), KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
         this.getRootPane().registerKeyboardAction(e -> mainController.undoCommand(), KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
         this.getRootPane().registerKeyboardAction(e -> mainController.redoCommand(), KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
+        this.getRootPane().registerKeyboardAction(e -> mainController.doSearch(), KeyStroke.getKeyStroke(KeyEvent.VK_F, KeyEvent.CTRL_DOWN_MASK), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     public void showError(String message) {
@@ -180,6 +181,16 @@ public final class MainPanel extends JFrame {
         }
 
         return Optional.ofNullable(chooser.getSelectedFile());
+    }
+
+    public Optional<String> getSearchInput() {
+        String searchWord = JOptionPane.showInputDialog(this, "Find");
+        return Optional.ofNullable(searchWord);
+    }
+
+    public void selectCell(Position position) {
+        table.getComponent().setRowSelectionInterval(position.getRow(), position.getRow());
+        table.getComponent().setColumnSelectionInterval(position.getColumn(), position.getColumn());
     }
 
 }

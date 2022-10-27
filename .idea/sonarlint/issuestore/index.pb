@@ -73,13 +73,9 @@ a
 1src/edu/gof/visitor/command/RemoveRowCommand.java,1\3\13d48885aa94c69dca64bc777ef5a402fd8f9a93
 V
 &src/edu/gof/visitor/model/CsvData.java,a\b\ab71ad94afb756db81a9821f0444a263a1494ff5
-b
-2src/edu/gof/visitor/controller/MainController.java,9\2\9261c8674a849f850b2c66ba9727e7ab0d9831eb
 e
 5src/edu/gof/visitor/service/iterator/CsvIterator.java,6\9\6960e96ccd63430def50c2c828aa131e2b51cbd8
 g
 7src/edu/gof/visitor/service/loader/csv/CsvImporter.java,e\f\ef077735b6dadc402ff80deeee2daf40096f8aab
-W
-'src/edu/gof/visitor/view/MainPanel.java,1\9\191f37416b3d9fec064e9b73f819ba72a78d2872
 X
 (src/edu/gof/visitor/ApplicationMain.java,b\e\bef3cf667904a96cb3fae36f21d2b9520b36660e
