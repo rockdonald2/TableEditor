@@ -10,6 +10,8 @@ import edu.gof.visitor.service.export.Exporter;
 import edu.gof.visitor.service.export.json.JsonExporter;
 import edu.gof.visitor.service.loader.Importer;
 import edu.gof.visitor.service.loader.csv.CsvImporter;
+import edu.gof.visitor.service.sort.ComparatorStrategy;
+import edu.gof.visitor.service.sort.DefaultSortStrategy;
 import edu.gof.visitor.utils.Util;
 import edu.gof.visitor.view.MainPanel;
 
@@ -220,6 +222,11 @@ public final class MainController {
         if (position != null) {
             mainPanel.selectCell(position);
         }
+    }
+
+    public void doSort(int colIdx) {
+        data.sort(new DefaultSortStrategy(), (v1, v2) -> v1.get(colIdx).compareTo(v2.get(colIdx)));
+        doDisplayData();
     }
 
     public String getValueAt(Position position) {

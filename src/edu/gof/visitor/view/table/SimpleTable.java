@@ -7,7 +7,6 @@ import edu.gof.visitor.model.Position;
 import edu.gof.visitor.utils.Constants;
 import edu.gof.visitor.view.MainPanel;
 import edu.gof.visitor.view.table.decorator.ProtectedFieldTableDecorator;
-import edu.gof.visitor.view.table.decorator.RowNumberTableDecorator;
 import edu.gof.visitor.view.table.model.CustomTableModel;
 import edu.gof.visitor.view.table.model.SimpleTableModel;
 
@@ -59,8 +58,7 @@ public class SimpleTable extends JTable implements Table {
         deleteRowPopupItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                Point point = SwingUtilities.convertPoint(deleteRowPopupItem, new Point(0, 0), SimpleTable.this);
-                int rowAtPoint = SimpleTable.this.rowAtPoint(point);
+                int rowAtPoint = getRowAtPoint(deleteRowPopupItem);
 
                 if (rowAtPoint > -1) {
                     MainController.instance().executeCommand(new RemoveRowCommand(MainController.instance(), new Position(rowAtPoint, 0)));
@@ -73,22 +71,48 @@ public class SimpleTable extends JTable implements Table {
         deleteColPopupItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                Point point = SwingUtilities.convertPoint(deleteColPopupItem, new Point(0, 0), SimpleTable.this);
-                int colAtPoint = SimpleTable.this.columnAtPoint(point);
+                int colAtPoint = getColumnAtPoint(deleteColPopupItem);
 
-                if (colAtPoint > -1) {
-                    if (isProtectedColumn(colAtPoint)) {
-                        MainPanel.instance().showError("Cannot delete protected column");
-                        return;
-                    }
-
-                    MainController.instance().executeCommand(new RemoveColumnCommand(MainController.instance(), new Position(0, colAtPoint)));
+                if (colAtPoint == -1) {
+                    return;
                 }
+
+                if (isProtectedColumn(colAtPoint)) {
+                    MainPanel.instance().showError("Cannot delete protected column");
+                    return;
+                }
+
+                MainController.instance().executeCommand(new RemoveColumnCommand(MainController.instance(), new Position(0, colAtPoint)));
             }
         });
         popupMenu.add(deleteColPopupItem);
 
+        final JMenuItem sortPopupItem = new JMenuItem("Sort on column values");
+        sortPopupItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int colAtPoint = getColumnAtPoint(sortPopupItem);
+
+                if (colAtPoint == -1) {
+                    return;
+                }
+
+                MainController.instance().doSort(colAtPoint);
+            }
+        });
+        popupMenu.add(sortPopupItem);
+
         this.setComponentPopupMenu(popupMenu);
+    }
+
+    private int getRowAtPoint(JComponent accordingTo) {
+        Point point = SwingUtilities.convertPoint(accordingTo, new Point(0, 0), SimpleTable.this);
+        return SimpleTable.this.rowAtPoint(point);
+    }
+
+    private int getColumnAtPoint(JComponent accordingTo) {
+        Point point = SwingUtilities.convertPoint(accordingTo, new Point(0, 0), SimpleTable.this);
+        return SimpleTable.this.columnAtPoint(point);
     }
 
     private boolean isProtectedColumn(int colIdx) {
