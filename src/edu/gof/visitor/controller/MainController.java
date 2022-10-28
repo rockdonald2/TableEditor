@@ -217,6 +217,10 @@ public final class MainController {
                     break;
                 }
             }
+
+            if (position != null) {
+                break;
+            }
         }
 
         if (position != null) {

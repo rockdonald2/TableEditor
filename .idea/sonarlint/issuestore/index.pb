@@ -75,3 +75,7 @@ z
 Jsrc/edu/gof/visitor/view/table/decorator/ProtectedFieldTableDecorator.java,6\b\6b017285a45972ebc12edbefbefefeec233c9392
 W
 'src/edu/gof/visitor/view/MainPanel.java,1\9\191f37416b3d9fec064e9b73f819ba72a78d2872
+V
+&src/edu/gof/visitor/model/CsvData.java,a\b\ab71ad94afb756db81a9821f0444a263a1494ff5
+h
+8src/edu/gof/visitor/service/sort/ComparatorStrategy.java,d\e\de6081fff2a0fe7c949157b46f06d5d3f9966dfd
