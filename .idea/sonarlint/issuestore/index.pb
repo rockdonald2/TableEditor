@@ -43,10 +43,6 @@ S
 #src/edu/gof/visitor/utils/Util.java,7\2\72b893162cfe1f45b4be74e9efc2f045f52042e6
 Y
 )src/edu/gof/visitor/utils/Converters.java,8\9\89e117b6cf1ddebd557d918b0e815e83892febb3
-[
-+src/edu/gof/visitor/model/DecimalField.java,2\3\2351d1702cf002a29878a1d91b185be5209267a6
-T
-$src/edu/gof/visitor/model/Field.java,6\e\6ea5c40b6e0519ede3d6ef863f37dd0aaad5f878
 Z
 *src/edu/gof/visitor/model/NumberField.java,f\1\f19076b5c39bedf0ae6b1d25068086832d80786c
 a
@@ -63,8 +59,6 @@ e
 5src/edu/gof/visitor/service/iterator/CsvIterator.java,6\9\6960e96ccd63430def50c2c828aa131e2b51cbd8
 g
 7src/edu/gof/visitor/service/loader/csv/CsvImporter.java,e\f\ef077735b6dadc402ff80deeee2daf40096f8aab
-X
-(src/edu/gof/visitor/ApplicationMain.java,b\e\bef3cf667904a96cb3fae36f21d2b9520b36660e
 j
 :src/edu/gof/visitor/view/table/model/SimpleTableModel.java,9\3\93300a84afa0b1f89170815b453139e02a9c7f30
 j
@@ -73,9 +67,11 @@ v
 Fsrc/edu/gof/visitor/view/table/decorator/ResettableTableDecorator.java,3\1\311e80dc028ec4b7961e15d15c435cf981b14b9e
 z
 Jsrc/edu/gof/visitor/view/table/decorator/ProtectedFieldTableDecorator.java,6\b\6b017285a45972ebc12edbefbefefeec233c9392
-W
-'src/edu/gof/visitor/view/MainPanel.java,1\9\191f37416b3d9fec064e9b73f819ba72a78d2872
 V
 &src/edu/gof/visitor/model/CsvData.java,a\b\ab71ad94afb756db81a9821f0444a263a1494ff5
 h
 8src/edu/gof/visitor/service/sort/ComparatorStrategy.java,d\e\de6081fff2a0fe7c949157b46f06d5d3f9966dfd
+_
+/src/edu/gof/visitor/view/table/SimpleTable.java,1\c\1cff4839277514397b60764fa63e2610b604e11b
+i
+9src/edu/gof/visitor/service/sort/DefaultSortStrategy.java,5\a\5a3ef3423692f75bfc76fd6129dc260ec63260ef

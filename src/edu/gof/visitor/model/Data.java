@@ -1,5 +1,6 @@
 package edu.gof.visitor.model;
 
+import edu.gof.visitor.service.search.SearchStrategy;
 import edu.gof.visitor.service.sort.ComparatorStrategy;
 import edu.gof.visitor.service.sort.SortStrategy;
 
@@ -17,6 +18,10 @@ public interface Data {
 
     default void sort(SortStrategy sortStrategy, ComparatorStrategy comparatorStrategy) {
         sortStrategy.sort(this, comparatorStrategy);
+    }
+
+    default Position search(SearchStrategy searchStrategy, String searchWord) {
+        return searchStrategy.search(this, searchWord);
     }
 
 }

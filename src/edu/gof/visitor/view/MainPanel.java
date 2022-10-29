@@ -5,7 +5,13 @@ import edu.gof.visitor.command.AddRowCommand;
 import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Data;
 import edu.gof.visitor.model.Position;
+import edu.gof.visitor.service.search.MatchCaseSearchStrategy;
+import edu.gof.visitor.service.search.SearchStrategy;
+import edu.gof.visitor.service.search.SubStringSearchStrategy;
+import edu.gof.visitor.service.search.WholeCellSearchStrategy;
 import edu.gof.visitor.utils.Constants;
+import edu.gof.visitor.view.button.SearchRadioButton;
+import edu.gof.visitor.view.exception.ViewException;
 import edu.gof.visitor.view.menu.MenuBar;
 import edu.gof.visitor.view.table.SimpleTable;
 import edu.gof.visitor.view.table.Table;
@@ -19,6 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -183,14 +190,50 @@ public final class MainPanel extends JFrame {
         return Optional.ofNullable(chooser.getSelectedFile());
     }
 
-    public Optional<String> getSearchInput() {
-        String searchWord = JOptionPane.showInputDialog(this, "Find");
-        return Optional.ofNullable(searchWord);
+    public Optional<Map.Entry<SearchStrategy, String>> getSearchInput() {
+        final JPanel mainSearchPanel = new JPanel(new GridLayout(2, 1));
+        mainSearchPanel.add(new JLabel("Find cell"));
+
+        final JPanel subSearchPanel = new JPanel();
+
+        final SearchRadioButton subStringBtn = new SearchRadioButton("Substring", new SubStringSearchStrategy(), true);
+        subSearchPanel.add(subStringBtn);
+        final SearchRadioButton wholeCellBtn = new SearchRadioButton("Match entire cell content", new WholeCellSearchStrategy());
+        subSearchPanel.add(wholeCellBtn);
+        final SearchRadioButton matchCaseBtn = new SearchRadioButton("Match case", new MatchCaseSearchStrategy());
+        subSearchPanel.add(matchCaseBtn);
+
+        ButtonGroup radioBtns = new ButtonGroup();
+        radioBtns.add(subStringBtn);
+        radioBtns.add(wholeCellBtn);
+        radioBtns.add(matchCaseBtn);
+
+        mainSearchPanel.add(subSearchPanel);
+
+        String searchWord = JOptionPane.showInputDialog(null, mainSearchPanel);
+
+        if (searchWord == null || searchWord.isBlank()) {
+            return Optional.empty();
+        }
+
+        if (subStringBtn.isSelected()) {
+            return Optional.of(Map.entry(subStringBtn.getSearchStrategy(), searchWord));
+        } else if (wholeCellBtn.isSelected()) {
+            return Optional.of(Map.entry(wholeCellBtn.getSearchStrategy(), searchWord));
+        } else if (matchCaseBtn.isSelected()) {
+            return Optional.of(Map.entry(matchCaseBtn.getSearchStrategy(), searchWord));
+        }
+
+        throw new ViewException("No search radio button selected");
     }
 
     public void selectCell(Position position) {
         table.getComponent().setRowSelectionInterval(position.getRow(), position.getRow());
         table.getComponent().setColumnSelectionInterval(position.getColumn(), position.getColumn());
+    }
+
+    public void clearSelection() {
+        table.getComponent().clearSelection();
     }
 
 }

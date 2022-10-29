@@ -10,6 +10,7 @@ import edu.gof.visitor.service.export.Exporter;
 import edu.gof.visitor.service.export.json.JsonExporter;
 import edu.gof.visitor.service.loader.Importer;
 import edu.gof.visitor.service.loader.csv.CsvImporter;
+import edu.gof.visitor.service.search.SearchStrategy;
 import edu.gof.visitor.service.sort.ComparatorStrategy;
 import edu.gof.visitor.service.sort.DefaultSortStrategy;
 import edu.gof.visitor.utils.Util;
@@ -202,29 +203,18 @@ public final class MainController {
     }
 
     public void doSearch() {
-        Optional<String> searchWord = mainPanel.getSearchInput();
+        final Optional<Map.Entry<SearchStrategy, String>> search = mainPanel.getSearchInput();
 
-        if (searchWord.isEmpty()) {
+        if (search.isEmpty()) {
             return;
         }
 
-        Position position = null;
-        final List<List<String>> tmpData = data.getData();
-        for (int i = 0; i < tmpData.size(); ++i) {
-            for (int j = 0; j < data.getHeaders().size(); ++j) {
-                if (tmpData.get(i).get(j).contains(searchWord.get())) {
-                    position = new Position(i, j);
-                    break;
-                }
-            }
-
-            if (position != null) {
-                break;
-            }
-        }
+        final Position position = data.search(search.get().getKey(), search.get().getValue());
 
         if (position != null) {
             mainPanel.selectCell(position);
+        } else {
+            mainPanel.clearSelection();
         }
     }
 
