@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66c56377-4c44-412d-b01f-7a4eb06b66c8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/9/191f37416b3d9fec064e9b73f819ba72a78d2872" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/3/2351d1702cf002a29878a1d91b185be5209267a6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/e/6ea5c40b6e0519ede3d6ef863f37dd0aaad5f878" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/e/bef3cf667904a96cb3fae36f21d2b9520b36660e" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/model/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/ApplicationMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/search/SearchStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/search/SearchStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +144,8 @@
       <workItem from="1666964169827" duration="7000" />
       <workItem from="1666977345820" duration="437000" />
       <workItem from="1667030724822" duration="54000" />
-      <workItem from="1667030792438" duration="2309000" />
+      <workItem from="1667030792438" duration="2541000" />
+      <workItem from="1667034497476" duration="166000" />
     </task>
     <servers />
   </component>

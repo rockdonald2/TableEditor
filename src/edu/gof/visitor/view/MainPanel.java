@@ -196,7 +196,7 @@ public final class MainPanel extends JFrame {
 
         final JPanel subSearchPanel = new JPanel();
 
-        final SearchRadioButton subStringBtn = new SearchRadioButton("Substring", new SubStringSearchStrategy(), true);
+        final SearchRadioButton subStringBtn = new SearchRadioButton("Match substring", new SubStringSearchStrategy(), true);
         subSearchPanel.add(subStringBtn);
         final SearchRadioButton wholeCellBtn = new SearchRadioButton("Match entire cell content", new WholeCellSearchStrategy());
         subSearchPanel.add(wholeCellBtn);

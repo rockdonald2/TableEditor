@@ -75,3 +75,17 @@ _
 /src/edu/gof/visitor/view/table/SimpleTable.java,1\c\1cff4839277514397b60764fa63e2610b604e11b
 i
 9src/edu/gof/visitor/service/sort/DefaultSortStrategy.java,5\a\5a3ef3423692f75bfc76fd6129dc260ec63260ef
+T
+$src/edu/gof/visitor/model/Field.java,6\e\6ea5c40b6e0519ede3d6ef863f37dd0aaad5f878
+[
++src/edu/gof/visitor/model/DecimalField.java,2\3\2351d1702cf002a29878a1d91b185be5209267a6
+b
+2src/edu/gof/visitor/service/sort/SortStrategy.java,9\4\94f61f00ec37b01d1b9f9cb44eb0233df397d2a5
+S
+#src/edu/gof/visitor/model/Data.java,3\d\3d6d5d5bef11dfa88a86b2437b7d70cbcbe7f6a8
+o
+?src/edu/gof/visitor/service/search/SubStringSearchStrategy.java,c\7\c77f1ce8b387c99cc893ffee1ce45c848d5270d8
+o
+?src/edu/gof/visitor/service/search/MatchCaseSearchStrategy.java,9\4\94399839b6f2fec72659b2928cd90a50f4d69c4f
+o
+?src/edu/gof/visitor/service/search/WholeCellSearchStrategy.java,6\7\6727b06e8dd28b140edbd8ce503d4bcfced1bb68
