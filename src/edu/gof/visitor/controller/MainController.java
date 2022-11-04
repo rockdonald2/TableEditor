@@ -273,28 +273,31 @@ public final class MainController {
     }
 
     public void updateCommands(PositionBasedCommand.Orientation orientation, PositionBasedCommand.Which which, int offset) {
-        commands.iterator().forEachRemaining(cmd -> {
-            if (!(cmd instanceof final PositionBasedCommand<?, ?> positionBasedCmd)) return;
+        commands.iterator().forEachRemaining(cmd -> internalUpdateCommand(cmd, orientation, which, offset));
+        undoCommands.iterator().forEachRemaining(cmd -> internalUpdateCommand(cmd, orientation, which, offset));
+    }
 
-            switch (orientation) {
-                case INCREASE -> {
-                    switch (which) {
-                        case ROW ->
-                                positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() + offset);
-                        case COLUMN ->
-                                positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() + offset);
-                    }
-                }
-                case DECREASE -> {
-                    switch (which) {
-                        case ROW ->
-                                positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() - offset);
-                        case COLUMN ->
-                                positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() - offset);
-                    }
+    private void internalUpdateCommand(Command<?, ?> cmd, PositionBasedCommand.Orientation orientation, PositionBasedCommand.Which which, int offset) {
+        if (!(cmd instanceof final PositionBasedCommand<?, ?> positionBasedCmd)) return;
+
+        switch (orientation) {
+            case INCREASE -> {
+                switch (which) {
+                    case ROW ->
+                            positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() + offset);
+                    case COLUMN ->
+                            positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() + offset);
                 }
             }
-        });
+            case DECREASE -> {
+                switch (which) {
+                    case ROW ->
+                            positionBasedCmd.getEditPosition().setRow(positionBasedCmd.getEditPosition().getRow() - offset);
+                    case COLUMN ->
+                            positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() - offset);
+                }
+            }
+        }
     }
 
 }
