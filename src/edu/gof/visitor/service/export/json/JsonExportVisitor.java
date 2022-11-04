@@ -6,6 +6,7 @@ import edu.gof.visitor.model.TextField;
 import edu.gof.visitor.service.export.ExportVisitor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class JsonExportVisitor implements ExportVisitor {
 
@@ -16,7 +17,13 @@ public class JsonExportVisitor implements ExportVisitor {
 
     @Override
     public String visit(TextField text) {
+        escapeTextField(text);
         return String.format("\"%s\": \"%s\"", text.getKey(), text.getValue());
+    }
+
+    private void escapeTextField(TextField text) {
+        final List<String> metaChars = List.of("\\", "\"");
+        metaChars.forEach(metaChar -> text.setValue(text.getValue().replace(metaChar, String.format("\\\\\\%s", metaChar))));
     }
 
     @Override

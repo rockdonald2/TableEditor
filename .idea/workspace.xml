@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66c56377-4c44-412d-b01f-7a4eb06b66c8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/out.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/out.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/model/TextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/TextField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +166,7 @@
       <workItem from="1667590883297" duration="234000" />
       <workItem from="1667591151007" duration="39000" />
       <workItem from="1667591209674" duration="125000" />
-      <workItem from="1667592924228" duration="293000" />
+      <workItem from="1667592924228" duration="2749000" />
     </task>
     <servers />
   </component>
