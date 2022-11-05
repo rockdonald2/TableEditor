@@ -6,6 +6,8 @@ import edu.gof.visitor.controller.MainController;
 import edu.gof.visitor.model.Position;
 import edu.gof.visitor.utils.Constants;
 import edu.gof.visitor.view.MainPanel;
+import edu.gof.visitor.view.diagrams.BarChartStrategy;
+import edu.gof.visitor.view.diagrams.PieChartStrategy;
 import edu.gof.visitor.view.table.decorator.ProtectedFieldTableDecorator;
 import edu.gof.visitor.view.table.model.CustomTableModel;
 import edu.gof.visitor.view.table.model.SimpleTableModel;
@@ -58,7 +60,7 @@ public class SimpleTable extends JTable implements Table {
         deleteRowPopupItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int rowAtPoint = getRowAtPoint(deleteRowPopupItem);
+                int rowAtPoint = getRowAtPoint(popupMenu);
 
                 if (rowAtPoint > -1) {
                     MainController.instance().executeCommand(new RemoveRowCommand(MainController.instance(), new Position(rowAtPoint, 0)));
@@ -71,7 +73,7 @@ public class SimpleTable extends JTable implements Table {
         deleteColPopupItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int colAtPoint = getColumnAtPoint(deleteColPopupItem);
+                int colAtPoint = getColumnAtPoint(popupMenu);
 
                 if (colAtPoint == -1) {
                     return;
@@ -91,7 +93,7 @@ public class SimpleTable extends JTable implements Table {
         sortPopupItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int colAtPoint = getColumnAtPoint(sortPopupItem);
+                int colAtPoint = getColumnAtPoint(popupMenu);
 
                 if (colAtPoint == -1) {
                     return;
@@ -101,6 +103,39 @@ public class SimpleTable extends JTable implements Table {
             }
         });
         popupMenu.add(sortPopupItem);
+
+        final JMenu diagramsPopupMenu = new JMenu("Diagrams");
+        final JMenuItem pieChartPopupItem = new JMenuItem("Pie chart on row values");
+        pieChartPopupItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int rowAtPoint = getRowAtPoint(popupMenu);
+
+                if (rowAtPoint == -1) {
+                    return;
+                }
+
+                MainController.instance().showDiagram(new PieChartStrategy(), rowAtPoint);
+            }
+        });
+        diagramsPopupMenu.add(pieChartPopupItem);
+
+        final JMenuItem barChartPopupItem = new JMenuItem("Bar chart on column values");
+        barChartPopupItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                int colAtPoint = getColumnAtPoint(popupMenu);
+
+                if (colAtPoint == -1) {
+                    return;
+                }
+
+                MainController.instance().showDiagram(new BarChartStrategy(), colAtPoint);
+            }
+        });
+        diagramsPopupMenu.add(barChartPopupItem);
+
+        popupMenu.add(diagramsPopupMenu);
 
         this.setComponentPopupMenu(popupMenu);
     }

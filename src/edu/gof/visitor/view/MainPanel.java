@@ -17,6 +17,8 @@ import edu.gof.visitor.view.table.SimpleTable;
 import edu.gof.visitor.view.table.Table;
 import edu.gof.visitor.view.table.decorator.ResettableTableDecorator;
 import edu.gof.visitor.view.table.decorator.RowNumberTableDecorator;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -236,4 +238,12 @@ public final class MainPanel extends JFrame {
         table.getComponent().clearSelection();
     }
 
+    public void showChart(JFreeChart chart) {
+        final JFrame chartFrame = new JFrame();
+        chartFrame.setContentPane(new ChartPanel(chart));
+        chartFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        chartFrame.setLocationRelativeTo(null);
+        chartFrame.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
+        chartFrame.setVisible(true);
+    }
 }

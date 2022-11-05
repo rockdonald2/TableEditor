@@ -11,10 +11,12 @@ import edu.gof.visitor.service.export.json.JsonExporter;
 import edu.gof.visitor.service.loader.Importer;
 import edu.gof.visitor.service.loader.csv.CsvImporter;
 import edu.gof.visitor.service.search.SearchStrategy;
-import edu.gof.visitor.service.sort.ComparatorStrategy;
 import edu.gof.visitor.service.sort.DefaultSortStrategy;
 import edu.gof.visitor.utils.Util;
 import edu.gof.visitor.view.MainPanel;
+import edu.gof.visitor.view.diagrams.DiagramStrategy;
+import edu.gof.visitor.view.diagrams.PieChartStrategy;
+import org.jfree.chart.JFreeChart;
 
 import java.io.File;
 import java.io.IOException;
@@ -297,6 +299,14 @@ public final class MainController {
                             positionBasedCmd.getEditPosition().setColumn(positionBasedCmd.getEditPosition().getColumn() - offset);
                 }
             }
+        }
+    }
+
+    public void showDiagram(DiagramStrategy diagramStrategy, int positionIdx) {
+        try {
+            mainPanel.showChart(diagramStrategy.createChart(data, positionIdx));
+        } catch (ServiceException e) {
+            mainPanel.showError("Cannot create the selected chart based on the values");
         }
     }
 

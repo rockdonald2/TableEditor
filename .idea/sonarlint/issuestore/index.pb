@@ -55,8 +55,6 @@ o
 ?src/edu/gof/visitor/service/search/MatchCaseSearchStrategy.java,9\4\94399839b6f2fec72659b2928cd90a50f4d69c4f
 o
 ?src/edu/gof/visitor/service/search/WholeCellSearchStrategy.java,6\7\6727b06e8dd28b140edbd8ce503d4bcfced1bb68
-f
-6src/edu/gof/visitor/service/search/SearchStrategy.java,b\4\b44c8ea7513b868a9a45e3348a50289fee004174
 X
 (src/edu/gof/visitor/ApplicationMain.java,b\e\bef3cf667904a96cb3fae36f21d2b9520b36660e
 f
@@ -69,8 +67,6 @@ a
 ,src/edu/gof/visitor/command/EditCommand.java,7\c\7cc16d9fe372affc2a0ab627abdb0dda0320525f
 X
 (src/edu/gof/visitor/command/Command.java,0\e\0e94c02341dc2f3df32b805645510a185def5c0d
-_
-/src/edu/gof/visitor/view/table/SimpleTable.java,1\c\1cff4839277514397b60764fa63e2610b604e11b
 Z
 *src/edu/gof/visitor/view/menu/MenuBar.java,9\2\92d396a2d432d74caabbb5260e4beec9e4b1d6d9
 e
@@ -87,16 +83,12 @@ W
 'src/edu/gof/visitor/model/Position.java,6\5\6523922ad22ea44b0bf5550c6dd1b05b8c5f6c53
 b
 2src/edu/gof/visitor/service/sort/SortStrategy.java,9\4\94f61f00ec37b01d1b9f9cb44eb0233df397d2a5
-W
-'src/edu/gof/visitor/view/MainPanel.java,1\9\191f37416b3d9fec064e9b73f819ba72a78d2872
 X
 (src/edu/gof/visitor/model/TextField.java,9\e\9ec28534ce6fefedc7474cde86d91e1f7df1a9e8
 S
 #src/edu/gof/visitor/model/Data.java,3\d\3d6d5d5bef11dfa88a86b2437b7d70cbcbe7f6a8
 `
 0src/edu/gof/visitor/service/export/Exporter.java,8\e\8e83de9c5218d20664f2b40b13ccee6cad36cb0c
-b
-2src/edu/gof/visitor/controller/MainController.java,9\2\9261c8674a849f850b2c66ba9727e7ab0d9831eb
 n
 >src/edu/gof/visitor/service/export/json/JsonExportVisitor.java,e\3\e34f179cc4de69055ce5d6927a6751537d8e7449
 i

@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66c56377-4c44-412d-b01f-7a4eb06b66c8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/9/191f37416b3d9fec064e9b73f819ba72a78d2872" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/c/1cff4839277514397b60764fa63e2610b604e11b" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/2/9261c8674a849f850b2c66ba9727e7ab0d9831eb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/4/b44c8ea7513b868a9a45e3348a50289fee004174" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/out.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/out.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/model/TextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/model/TextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/service/export/json/JsonExportVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GOF1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GOF1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/MainPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/gof/visitor/view/table/SimpleTable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +48,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Workspace/egyetem/mesteri/tervezésiMintákÉsSablonok/projektek/GOF1/GOF1",
+    "last_opened_file_path": "C:/Workspace/egyetem/mesteri/tervezésiMintákÉsSablonok/projektek/GOF1/GOF1/lib/jfreechart-1.5.3.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -50,7 +56,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "settings.editor.splitter.proportion": "0.264308",
     "vue.rearranger.settings.migration": "true"
   }
@@ -167,6 +173,8 @@
       <workItem from="1667591151007" duration="39000" />
       <workItem from="1667591209674" duration="125000" />
       <workItem from="1667592924228" duration="2749000" />
+      <workItem from="1667633346382" duration="1161000" />
+      <workItem from="1667634531888" duration="3267000" />
     </task>
     <servers />
   </component>
