@@ -246,4 +246,5 @@ public final class MainPanel extends JFrame {
         chartFrame.setSize(Constants.WIN_SIZE_WIDTH, Constants.WIN_SIZE_HEIGHT);
         chartFrame.setVisible(true);
     }
+
 }

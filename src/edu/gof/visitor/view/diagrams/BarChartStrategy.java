@@ -16,13 +16,13 @@ public class BarChartStrategy implements DiagramStrategy {
     @Override
     public JFreeChart createChart(Data data, int positionIdx) throws ServiceException {
         try {
-            String header = data.getHeaders().get(positionIdx);
-            List<Double> rowData = new ArrayList<>();
+            final String header = data.getHeaders().get(positionIdx);
+            final List<Double> rowData = new ArrayList<>();
             data.getData().forEach(row -> rowData.add(Double.valueOf(row.get(positionIdx))));
 
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             AtomicInteger idx = new AtomicInteger(1);
-            rowData.forEach(d -> dataset.addValue(d, String.format("%s #%s", header, idx.getAndIncrement()), ""));
+            rowData.forEach(d -> dataset.addValue(d, header, String.format("%s #%s", header, idx.getAndIncrement())));
 
             return ChartFactory.createBarChart("Bar Chart", "Column", "Value", dataset, PlotOrientation.VERTICAL, true, true, false);
         } catch (Exception e) {
