@@ -15,20 +15,15 @@ import edu.gof.visitor.service.sort.DefaultSortStrategy;
 import edu.gof.visitor.utils.Util;
 import edu.gof.visitor.view.MainPanel;
 import edu.gof.visitor.view.diagrams.DiagramStrategy;
-import edu.gof.visitor.view.diagrams.PieChartStrategy;
-import org.jfree.chart.JFreeChart;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public final class MainController {
-
-    private static final Logger log = Logger.getLogger(MainController.class.getName());
 
     private static MainController instance;
 
@@ -55,8 +50,6 @@ public final class MainController {
             throw new IllegalStateException(String.format("%s already initialized", MainPanel.class.getName()));
         }
 
-        log.info("Initialized MainController");
-
         this.data = new CsvData();
         this.mainPanel = MainPanel.instance();
         this.mainPanel.init();
@@ -77,7 +70,6 @@ public final class MainController {
             doDisplayData();
             mainPanel.showInfo("Successfully imported data");
         } catch (ServiceException e) {
-            log.severe(String.format("Exception occurred at importing data: %s", e.getMessage()));
             mainPanel.showError(e.getMessage());
         }
     }
@@ -129,7 +121,6 @@ public final class MainController {
                 throw new ServiceException("Failed to save data", e);
             }
         } catch (ServiceException e) {
-            log.severe(String.format("Exception occurred while exporting data: %s", e.getMessage()));
             mainPanel.showError(e.getMessage());
         }
     }

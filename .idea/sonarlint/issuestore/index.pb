@@ -67,8 +67,6 @@ W
 'src/edu/gof/visitor/model/Position.java,6\5\6523922ad22ea44b0bf5550c6dd1b05b8c5f6c53
 b
 2src/edu/gof/visitor/service/sort/SortStrategy.java,9\4\94f61f00ec37b01d1b9f9cb44eb0233df397d2a5
-X
-(src/edu/gof/visitor/ApplicationMain.java,b\e\bef3cf667904a96cb3fae36f21d2b9520b36660e
 f
 6src/edu/gof/visitor/service/search/SearchStrategy.java,b\4\b44c8ea7513b868a9a45e3348a50289fee004174
 8
@@ -95,3 +93,13 @@ u
 Esrc/edu/gof/visitor/view/table/decorator/RowNumberTableDecorator.java,b\f\bf6d569922ab468a2ba83091022b44f0e85ad7da
 f
 6src/edu/gof/visitor/view/button/SearchRadioButton.java,6\c\6ce2fa1f55a8a6f1101fb087d719d1799377b2a5
+g
+7src/edu/gof/visitor/view/diagrams/BarChartStrategy.java,2\f\2ffa528c67c9a1ef52f6d5bdedbbef04c08100d2
+W
+'src/edu/gof/visitor/view/MainPanel.java,1\9\191f37416b3d9fec064e9b73f819ba72a78d2872
+X
+(src/edu/gof/visitor/ApplicationMain.java,b\e\bef3cf667904a96cb3fae36f21d2b9520b36660e
+b
+2src/edu/gof/visitor/controller/MainController.java,9\2\9261c8674a849f850b2c66ba9727e7ab0d9831eb
+=
+data/out.json,4\3\438b6f29f37c7eff2366662af7c6d11e7fe09f83

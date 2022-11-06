@@ -42,6 +42,7 @@ public final class MainPanel extends JFrame {
     private JMenuItem addColumnBtn;
     private JMenuItem exportItem;
     private JCheckBoxMenuItem rowDecoratorBtn;
+    private JMenuItem findBtn;
 
     // flag
     private boolean initialized;
@@ -120,6 +121,7 @@ public final class MainPanel extends JFrame {
         exportItem = menuBar.addItemToMenu(mainMenu.getText(), "Export Table", e -> mainController.doExportData(), false);
         addRowBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Row", this::addNewRow, false);
         addColumnBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Column", this::addNewColumn, false);
+        findBtn = menuBar.addItemToMenu(fileMenu.getText(), "Find Cell", e -> mainController.doSearch(), false);
         rowDecoratorBtn = menuBar.addToggleItemToMenu(othersMenu.getText(), "Add Row Numbering", this::toggleRowNumbering, false);
 
         this.setJMenuBar(menuBar);
@@ -163,6 +165,7 @@ public final class MainPanel extends JFrame {
         addColumnBtn.setEnabled(true);
         exportItem.setEnabled(true);
         rowDecoratorBtn.setEnabled(true);
+        findBtn.setEnabled(true);
     }
 
     private void importData(ActionEvent e) {

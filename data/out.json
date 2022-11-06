@@ -4,34 +4,41 @@
     "clientEmail": "lukacs.zsolt@email.com",
     "clientTel": 40074323213,
     "clientAge": 22,
-    "test1": "|"
+    "Teszt": ""
   },
   {
     "clientName": "Lukacs Csaba",
     "clientEmail": "lukacs.csaba@email.com",
     "clientTel": 40074323213,
     "clientAge": 29,
-    "test1": "asd"
+    "Teszt": 231
   },
   {
-    "clientName": "",
+    "clientName": "asd",
     "clientEmail": "asd",
+    "clientTel": 13,
+    "clientAge": 14,
+    "Teszt": ""
+  },
+  {
+    "clientName": "sad",
+    "clientEmail": "asd",
+    "clientTel": "sad",
+    "clientAge": 15,
+    "Teszt": "asd"
+  },
+  {
+    "clientName": "//",
+    "clientEmail": 321,
     "clientTel": "",
-    "clientAge": 1,
-    "test1": "////"
+    "clientAge": "100asd",
+    "Teszt": "asd"
   },
   {
     "clientName": "",
     "clientEmail": "",
-    "clientTel": "asd",
-    "clientAge": 1,
-    "test1": "tesa"
-  },
-  {
-    "clientName": "",
-    "clientEmail": "",
     "clientTel": "",
-    "clientAge": 1,
-    "test1": ";;;"
+    "clientAge": "",
+    "Teszt": ""
   }
 ]
