@@ -2,11 +2,11 @@ package edu.gof.visitor.model;
 
 import edu.gof.visitor.service.export.ExportVisitor;
 
-public class NumberField extends Field {
+public class IntegerField extends Field {
 
     private int value;
 
-    public NumberField(String key, int value) {
+    public IntegerField(String key, int value) {
         super(key);
         this.value = value;
     }

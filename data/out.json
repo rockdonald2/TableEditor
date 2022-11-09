@@ -1,44 +1,23 @@
 [
   {
+    "#": 1,
     "clientName": "Lukacs Zsolt",
     "clientEmail": "lukacs.zsolt@email.com",
     "clientTel": 40074323213,
-    "clientAge": 22,
-    "Teszt": ""
+    "clientAge": 22
   },
   {
+    "#": 2,
     "clientName": "Lukacs Csaba",
     "clientEmail": "lukacs.csaba@email.com",
     "clientTel": 40074323213,
-    "clientAge": 29,
-    "Teszt": 231
+    "clientAge": "29/"
   },
   {
-    "clientName": "asd",
-    "clientEmail": "asd",
-    "clientTel": 13,
-    "clientAge": 14,
-    "Teszt": ""
-  },
-  {
-    "clientName": "sad",
-    "clientEmail": "asd",
-    "clientTel": "sad",
-    "clientAge": 15,
-    "Teszt": "asd"
-  },
-  {
-    "clientName": "//",
-    "clientEmail": 321,
-    "clientTel": "",
-    "clientAge": "100asd",
-    "Teszt": "asd"
-  },
-  {
+    "#": 3,
     "clientName": "",
-    "clientEmail": "",
+    "clientEmail": "asd",
     "clientTel": "",
-    "clientAge": "",
-    "Teszt": ""
+    "clientAge": ""
   }
 ]

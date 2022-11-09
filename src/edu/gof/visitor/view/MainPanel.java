@@ -130,6 +130,7 @@ public final class MainPanel extends JFrame {
     private void baseConfig() {
         registerKeyShortcuts();
 
+        this.setTitle("Table Editor");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setLocationRelativeTo(null);

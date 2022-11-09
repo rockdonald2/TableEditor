@@ -1,7 +1,7 @@
 package edu.gof.visitor.service.export.json;
 
 import edu.gof.visitor.model.DecimalField;
-import edu.gof.visitor.model.NumberField;
+import edu.gof.visitor.model.IntegerField;
 import edu.gof.visitor.model.TextField;
 import edu.gof.visitor.service.export.ExportVisitor;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public class JsonExportVisitor implements ExportVisitor {
 
     @Override
-    public String visit(NumberField number) {
+    public String visit(IntegerField number) {
         return String.format("\"%s\": %s", number.getKey(), number.getValue());
     }
 
