@@ -1,5 +1,6 @@
 package edu.gof.visitor.view;
 
+import com.formdev.flatlaf.FlatLightLaf;
 import edu.gof.visitor.command.AddColumnCommand;
 import edu.gof.visitor.command.AddRowCommand;
 import edu.gof.visitor.controller.MainController;
@@ -60,6 +61,8 @@ public final class MainPanel extends JFrame {
     }
 
     public void init() {
+        FlatLightLaf.setup(); // look-and-feel
+
         if (initialized) {
             throw new IllegalStateException(String.format("%s already initialized", MainPanel.class.getName()));
         }
@@ -116,6 +119,7 @@ public final class MainPanel extends JFrame {
         final JMenu mainMenu = menuBar.addMenu("Main Menu", KeyEvent.VK_M);
         final JMenu fileMenu = menuBar.addMenu("File", KeyEvent.VK_F);
         final JMenu othersMenu = menuBar.addMenu("Others", KeyEvent.VK_O);
+        final JMenu helpMenu = menuBar.addMenu("Help", KeyEvent.VK_H);
 
         menuBar.addItemToMenu(mainMenu.getText(), "Open Document", MainPanel.this::importData, true);
         exportItem = menuBar.addItemToMenu(mainMenu.getText(), "Export Table", e -> mainController.doExportData(), false);
@@ -123,6 +127,10 @@ public final class MainPanel extends JFrame {
         addColumnBtn = menuBar.addItemToMenu(fileMenu.getText(), "Add Column", this::addNewColumn, false);
         findBtn = menuBar.addItemToMenu(fileMenu.getText(), "Find Cell", e -> mainController.doSearch(), false);
         rowDecoratorBtn = menuBar.addToggleItemToMenu(othersMenu.getText(), "Add Row Numbering", this::toggleRowNumbering, false);
+
+        menuBar.addItemToMenu(helpMenu.getText(), "Help", e -> {
+            showInfo("Keyboard shortcuts:\n\nCTRL-F: to search within the table\nCTRL-S: save the table\nCTRL-Z: undo changes\nCTRL-R: redo changes");
+        }, true);
 
         this.setJMenuBar(menuBar);
     }
